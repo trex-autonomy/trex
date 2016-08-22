@@ -1,0 +1,252 @@
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/navigator/navigator.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/deprecated/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/nddl/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/deprecated/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/TREX.nddl doesn't exist
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex/TREX/agent/base/TREX.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/world_model/topological_map.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/rcs/base_state.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/ros.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/deprecated/ros.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/ros.nddl doesn't exist
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/nddl/ros.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/deprecated/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/nddl/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/deprecated/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/TREX.nddl doesn't exist
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex/TREX/agent/base/TREX.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/common/move_behavior.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/deprecated/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/nddl/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/deprecated/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/TREX.nddl doesn't exist
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex/TREX/agent/base/TREX.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/world_model/topological_map.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/navigator/exports.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/deprecated/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/nddl/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/deprecated/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/TREX.nddl doesn't exist
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex/TREX/agent/base/TREX.nddl
+[NddlInterpreter:interpret]NDDL AST:
+(NDDL (enum TokenStates ({ INACTIVE ACTIVE MERGED REJECTED)) (class Timeline {) (VARIABLE float TICK_DURATION) (VARIABLE int MISSION_END) (VARIABLE int AGENT_CLOCK) (enum Mode ({ External Internal Ignore)) (class AgentTimeline (extends Timeline) ({ (VARIABLE Mode mode) (VARIABLE string defaultPredicate) (VARIABLE bool persistent) (predicate undefined {) (predicate Terminated ({ (CONSTRAINT_INSTANTIATION concurrent (( end MISSION_END)))) (CONSTRUCTOR AgentTimeline (( (VARIABLE _mode Mode)) ({ (= mode _mode) (= defaultPredicate "undefined") (= persistent true))) (CONSTRUCTOR AgentTimeline (( (VARIABLE _mode Mode) (VARIABLE _defaultPredicate string)) ({ (= mode _mode) (= defaultPredicate _defaultPredicate) (= persistent true))) (CONSTRUCTOR AgentTimeline (( (VARIABLE _mode Mode) (VARIABLE _defaultPredicate string) (VARIABLE _persistent bool)) ({ (= mode _mode) (= defaultPredicate _defaultPredicate) (= persistent _persistent))))) (class AgentActions ({ (predicate startEvent ({ (CONSTRAINT_INSTANTIATION eq (( duration 1)))) (CONSTRUCTOR AgentActions ( {))) (class StateVariable (extends AgentTimeline) ({ (predicate Holds ({ (CONSTRAINT_INSTANTIATION eq (( duration 1)))) (CONSTRUCTOR StateVariable (( (VARIABLE _mode Mode)) ({ (super (( _mode)))) (CONSTRUCTOR StateVariable (( (VARIABLE _mode Mode) (VARIABLE _defaultPredicate string)) ({ (super (( _mode _defaultPredicate)))))) (enum ResultStatus ({ UNDEFINED SUCCESS ABORTED PREEMPTED)) (class Behavior (extends AgentTimeline) ({ (predicate Inactive ({ (VARIABLE ResultStatus status))) (predicate Active ({ (VARIABLE int dispatch_time) (VARIABLE int max_duration) (CONSTRAINT_INSTANTIATION precedes (( dispatch_time start)) (CONSTRAINT_INSTANTIATION temporalDistance (( start ([ 1 inf) MISSION_END)) (CONSTRAINT_INSTANTIATION trex_behavior (( object)))) (CONSTRUCTOR Behavior (( (VARIABLE _mode Mode)) ({ (super (( _mode "Inactive" false)))))) (:: Behavior Active ({ (TOKEN_RELATION meets (( (PREDICATE_INSTANCE Inactive _reserved_s))) (EXPRESSION_ENFORCE (<= max_duration (- end start))))) (:: Behavior Inactive ({ (CONSTRAINT_INSTANTIATION defaultOnCommit (( status UNDEFINED)))) (typedef MAP_KEY int ([ 0 100000)) (VARIABLE MAP_KEY (= NO_KEY 0)) (class Location ({ (VARIABLE string frame_id) (VARIABLE float x) (VARIABLE float y) (VARIABLE float z) (VARIABLE float qx) (VARIABLE float qy) (VARIABLE float qz) (VARIABLE float qw) (CONSTRUCTOR Location (( (VARIABLE x_ float) (VARIABLE y_ float) (VARIABLE z_ float) (VARIABLE qx_ float) (VARIABLE qy_ float) (VARIABLE qz_ float) (VARIABLE qw_ float)) ({ (= frame_id "map") (= x x_) (= y y_) (= z z_) (= qx qx_) (= qy qy_) (= qz qz_) (= qw qw_))))) (class Waypoint (extends Location) ({ (CONSTRUCTOR Waypoint (( (VARIABLE x_ float) (VARIABLE y_ float) (VARIABLE z_ float) (VARIABLE qx_ float) (VARIABLE qy_ float) (VARIABLE qz_ float) (VARIABLE qw_ float)) ({ (super (( x_ y_ z_ qx_ qy_ qz_ qw_)))))) (class ChargingStation (extends Location) ({ (CONSTRUCTOR ChargingStation (( (VARIABLE x_ float) (VARIABLE y_ float) (VARIABLE z_ float) (VARIABLE qx_ float) (VARIABLE qy_ float) (VARIABLE qz_ float) (VARIABLE qw_ float)) ({ (super (( x_ y_ z_ qx_ qy_ qz_ qw_)))))) (typedef TIME_ERROR_BOUND int ([ -1 1)) (class ROSStateVariable (extends AgentTimeline) ({ (predicate Holds {) (CONSTRUCTOR ROSStateVariable (( (VARIABLE _mode Mode)) ({ (super (( _mode "Holds")))) (CONSTRUCTOR ROSStateVariable (( (VARIABLE _mode Mode) (VARIABLE _default_value string) (VARIABLE _persistent bool)) ({ (super (( _mode _default_value _persistent)))) (CONSTRUCTOR ROSStateVariable (( (VARIABLE _mode Mode) (VARIABLE _pred string)) ({ (super (( _mode _pred)))) (CONSTRUCTOR ROSStateVariable (( (VARIABLE _mode Mode) (VARIABLE _pred string) (VARIABLE _opt bool)) ({ (super (( _mode _pred _opt)))))) (class StateMachine (extends AgentTimeline) ({ (predicate Inactive ({ (VARIABLE ResultStatus status) (CONSTRAINT_INSTANTIATION defaultOnCommit (( status UNDEFINED)) (CONSTRAINT_INSTANTIATION temporalDistance (( start ([ 1 inf) MISSION_END)))) (CONSTRUCTOR StateMachine ( ({ (super (( Internal "Inactive")))) (CONSTRUCTOR StateMachine (( (VARIABLE _mode Mode) (VARIABLE _default_value string) (VARIABLE _persistent bool)) ({ (super (( Internal "Inactive" _persistent)))))) (class ROSAction (extends Behavior) ({ (CONSTRUCTOR ROSAction (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (:: ROSAction Active ({ (VARIABLE int time_since_dispatch) (EXPRESSION_ENFORCE (== (+ dispatch_time time_since_dispatch) start)) (EXPRESSION_ENFORCE (<= time_since_dispatch 100)))) (class BooleanTimeline (extends AgentTimeline) ({ (predicate True {) (predicate False {) (CONSTRUCTOR BooleanTimeline (( (VARIABLE _mode Mode) (VARIABLE _default_value string)) ({ (super (( _mode _default_value true)))) (CONSTRUCTOR BooleanTimeline (( (VARIABLE _mode Mode) (VARIABLE _default_value string) (VARIABLE _persistent bool)) ({ (super (( _mode _default_value _persistent)))))) (class BaseState (extends ROSStateVariable) ({ (predicate Holds ({ (VARIABLE float time_stamp) (VARIABLE string frame_id) (VARIABLE float x) (VARIABLE float y) (VARIABLE float z) (VARIABLE float qx) (VARIABLE float qy) (VARIABLE float qz) (VARIABLE float qw))) (CONSTRUCTOR BaseState (( (VARIABLE _mode Mode)) ({ (super (( _mode "Holds" true)))))) (class MoveBehavior (extends Behavior) ({ (predicate Inactive ({ (VARIABLE string frame_id) (VARIABLE float time_stamp) (VARIABLE float x) (VARIABLE float y) (VARIABLE float z) (VARIABLE float qx) (VARIABLE float qy) (VARIABLE float qz) (VARIABLE float qw))) (predicate Active ({ (VARIABLE string frame_id) (VARIABLE float time_stamp) (VARIABLE float x) (VARIABLE float y) (VARIABLE float z) (VARIABLE float qx) (VARIABLE float qy) (VARIABLE float qz) (VARIABLE float qw) (VARIABLE MAP_KEY start_connector))) (CONSTRUCTOR MoveBehavior (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (:: MoveBehavior Inactive ({ (if (EXPRESSION_RETURN (== status SUCCESS)) ({ (TOKEN_RELATION met_by (( (PREDICATE_INSTANCE Active p))) (CONSTRAINT_INSTANTIATION eq_pose_msg (( object (. p object))))))) (class Navigator (extends Behavior) ({ (predicate Inactive {) (predicate Active ({ (VARIABLE string frame_id) (VARIABLE float time_stamp) (VARIABLE float x) (VARIABLE float y) (VARIABLE float z) (VARIABLE float qx) (VARIABLE float qy) (VARIABLE float qz) (VARIABLE float qw) (CONSTRAINT_INSTANTIATION defaultOnCommit (( frame_id "map")))) (predicate Inactive ({ (VARIABLE string frame_id) (VARIABLE float time_stamp) (VARIABLE float x) (VARIABLE float y) (VARIABLE float z) (VARIABLE float qx) (VARIABLE float qy) (VARIABLE float qz) (VARIABLE float qw) (CONSTRAINT_INSTANTIATION defaultOnCommit (( frame_id "map")))) (CONSTRUCTOR Navigator (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (:: Navigator Inactive ({ (if (EXPRESSION_RETURN (== status SUCCESS)) ({ (TOKEN_RELATION met_by (( (PREDICATE_INSTANCE Active p))) (CONSTRAINT_INSTANTIATION eq_pose_msg (( object (. p object))))))) (VARIABLE float (= DOORMAN_DURATION_BOUND 20.0)) (VARIABLE float (= DRIVER_DURATION_BOUND 6000.0)) (class NavController (extends AgentTimeline) ({ (predicate Holds ({ (VARIABLE bool active) (VARIABLE float x) (VARIABLE float y))) (CONSTRUCTOR NavController ( ({ (super (( Internal "Holds")))) (CONSTRUCTOR NavController (( (VARIABLE _mode Mode)) ({ (super (( _mode "Holds")))))) (VARIABLE Navigator (= navigator (CONSTRUCTOR_INVOCATION Navigator (( Internal)))) (VARIABLE NavController (= nav_controller (CONSTRUCTOR_INVOCATION NavController (( Internal)))) (VARIABLE MoveBehavior (= driver (CONSTRUCTOR_INVOCATION MoveBehavior (( External)))) (VARIABLE MoveBehavior (= doorman (CONSTRUCTOR_INVOCATION MoveBehavior (( External)))) (VARIABLE BaseState (= base_state (CONSTRUCTOR_INVOCATION BaseState (( External)))) (:: Navigator Active ({ (if (EXPRESSION_RETURN (FUNCTION_CALL isSingleton (( start))) ({ (TOKEN_RELATION starts (( (PREDICATE_INSTANCE (. nav_controller Holds) nc))) (EXPRESSION_ENFORCE (== (. nc active) true)) (TOKEN_RELATION starts_during (( (PREDICATE_INSTANCE (. base_state Holds) bs))) (EXPRESSION_ENFORCE (== (. nc x) (. bs x))) (EXPRESSION_ENFORCE (== (. nc y) (. bs y))))))) (:: NavController Holds ({ (TOKEN_RELATION met_by (( (PREDICATE_INSTANCE Holds p))) (CONSTRAINT_INSTANTIATION defaultOnCommit (( active (. p active))) (CONSTRAINT_INSTANTIATION defaultOnCommit (( x (. p x))) (CONSTRAINT_INSTANTIATION defaultOnCommit (( y (. p y))) (if (EXPRESSION_RETURN (== active false)) ({ (TOKEN_RELATION equals (( (PREDICATE_INSTANCE (. navigator Inactive))))) ({ (TOKEN_RELATION meets (( (PREDICATE_INSTANCE Holds s))) (TOKEN_RELATION contained_by (( (PREDICATE_INSTANCE (. navigator Active) nav_active))) (VARIABLE float distance) (CONSTRAINT_INSTANTIATION calcDistance (( distance x y (. nav_active x) (. nav_active y))) (if (EXPRESSION_RETURN (|| (== (FUNCTION_CALL isTimedOut (( (. nav_active object))) true) (< distance 0.2))) ({ (TOKEN_RELATION meets (( (PREDICATE_INSTANCE (. navigator Inactive) nav_inactive))) (EXPRESSION_ENFORCE (== (. s active) false)) (EXPRESSION_ENFORCE (== duration 1)) (if (EXPRESSION_RETURN (< distance 0.2)) ({ (EXPRESSION_ENFORCE (== (. nav_inactive status) SUCCESS))) ({ (EXPRESSION_ENFORCE (== (. nav_inactive status) PREEMPTED))))) ({ (TOKEN_RELATION contains_start (( (PREDICATE_INSTANCE (. MoveBehavior Active) cmd))) (TOKEN_RELATION ends cmd) (EXPRESSION_ENFORCE (== (. cmd frame_id) (. nav_active frame_id))) (VARIABLE bool thru_doorway) (CONSTRAINT_INSTANTIATION map_get_next_move (( (. cmd x) (. cmd y) (. cmd z) (. cmd qx) (. cmd qy) (. cmd qz) (. cmd qw) thru_doorway x y (. nav_active x) (. nav_active y) (. nav_active z) (. nav_active qx) (. nav_active qy) (. nav_active qz) (. nav_active qw))) (CONSTRAINT_INSTANTIATION map_get_nearest_connector (( (. cmd start_connector) x y (. nav_active x) (. nav_active y))) (if (EXPRESSION_RETURN (== thru_doorway true)) ({ (EXPRESSION_ENFORCE (== (. cmd object) doorman)) (EXPRESSION_ENFORCE (<= (. cmd max_duration) DOORMAN_DURATION_BOUND))) ({ (EXPRESSION_ENFORCE (== (. cmd object) driver)) (EXPRESSION_ENFORCE (<= (. cmd max_duration) DRIVER_DURATION_BOUND)))))))))) (:: MoveBehavior Inactive ({ (TOKEN_RELATION starts_during (( (PREDICATE_INSTANCE (. nav_controller Holds) nc))) (if (EXPRESSION_RETURN (== status SUCCESS)) ({ (EXPRESSION_ENFORCE (== (. nc x) x)) (EXPRESSION_ENFORCE (== (. nc y) y))) ({ (TOKEN_RELATION starts_during (( (PREDICATE_INSTANCE (. navigator Inactive) nav_inactive))) (EXPRESSION_ENFORCE (== status (. nav_inactive status))))))) (METHOD_CALL close ())
+[NddlInterpreter:nddl]Evaluating:ENUMDEF:TokenStates
+[NddlInterpreter:nddl]Evaluating:class Timeline extends extends Object {
+
+
+}
+
+[NddlInterpreter:nddl]Evaluating:float TICK_DURATION
+
+[NddlInterpreter:nddl]Evaluating:int MISSION_END
+
+[NddlInterpreter:nddl]Evaluating:int AGENT_CLOCK
+
+[NddlInterpreter:nddl]Evaluating:ENUMDEF:Mode
+[NddlInterpreter:nddl]Evaluating:class AgentTimeline extends extends Timeline {
+    string defaultPredicate
+    Mode mode
+    bool persistent
+
+    AgentTimeline:Mode
+    AgentTimeline:Mode:string
+    AgentTimeline:Mode:string:bool
+
+    AgentTimeline.undefined
+    AgentTimeline.Terminated
+}
+
+[NddlInterpreter:nddl]Evaluating:class AgentActions extends extends Object {
+
+    AgentActions
+
+    AgentActions.startEvent
+}
+
+[NddlInterpreter:nddl]Evaluating:class StateVariable extends extends AgentTimeline {
+
+    StateVariable:Mode
+    StateVariable:Mode:string
+
+    StateVariable.Holds
+}
+
+[NddlInterpreter:nddl]Evaluating:ENUMDEF:ResultStatus
+[NddlInterpreter:nddl]Evaluating:class Behavior extends extends AgentTimeline {
+
+    Behavior:Mode
+
+    Behavior.Active int->dispatch_time int->max_duration
+    Behavior.Inactive ResultStatus->status
+}
+
+[NddlInterpreter]Parsing rule for:Behavior.Active
+[NddlInterpreter:nddl]Evaluating:RuleFactory Behavior.Active
+[NddlInterpreter]Parsing rule for:Behavior.Inactive
+[NddlInterpreter:nddl]Evaluating:RuleFactory Behavior.Inactive
+[NddlInterpreter:nddl]Evaluating:TYPEDEF:int -> MAP_KEY
+[NddlInterpreter:nddl]Evaluating:MAP_KEY NO_KEY {CONSTANT int int:CLOSED[0, 0]}
+
+[NddlInterpreter:nddl]Evaluating:class Location extends extends Object {
+    string frame_id
+    float qw
+    float qx
+    float qy
+    float qz
+    float x
+    float y
+    float z
+
+    Location:float:float:float:float:float:float:float
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class Waypoint extends extends Location {
+
+    Waypoint:float:float:float:float:float:float:float
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class ChargingStation extends extends Location {
+
+    ChargingStation:float:float:float:float:float:float:float
+
+}
+
+[NddlInterpreter:nddl]Evaluating:TYPEDEF:int -> TIME_ERROR_BOUND
+[NddlInterpreter:nddl]Evaluating:class ROSStateVariable extends extends AgentTimeline {
+
+    ROSStateVariable:Mode
+    ROSStateVariable:Mode:string:bool
+    ROSStateVariable:Mode:string
+
+    ROSStateVariable.Holds
+}
+
+[NddlInterpreter:nddl]Evaluating:class StateMachine extends extends AgentTimeline {
+
+    StateMachine
+    StateMachine:Mode:string:bool
+
+    StateMachine.Inactive ResultStatus->status
+}
+
+[NddlInterpreter:nddl]Evaluating:class ROSAction extends extends Behavior {
+
+    ROSAction:Mode
+
+}
+
+[NddlInterpreter]Parsing rule for:ROSAction.Active
+[NddlInterpreter:nddl]Evaluating:RuleFactory ROSAction.Active
+[NddlInterpreter:nddl]Evaluating:class BooleanTimeline extends extends AgentTimeline {
+
+    BooleanTimeline:Mode:string
+    BooleanTimeline:Mode:string:bool
+
+    BooleanTimeline.True
+    BooleanTimeline.False
+}
+
+[NddlInterpreter:nddl]Evaluating:class BaseState extends extends ROSStateVariable {
+
+    BaseState:Mode
+
+    BaseState.Holds string->frame_id float->qw float->qx float->qy float->qz float->time_stamp float->x float->y float->z
+}
+
+[NddlInterpreter:nddl]Evaluating:class MoveBehavior extends extends Behavior {
+
+    MoveBehavior:Mode
+
+    MoveBehavior.Inactive string->frame_id float->qw float->qx float->qy float->qz float->time_stamp float->x float->y float->z
+    MoveBehavior.Active string->frame_id float->qw float->qx float->qy float->qz MAP_KEY->start_connector float->time_stamp float->x float->y float->z
+}
+
+[NddlInterpreter]Parsing rule for:MoveBehavior.Inactive
+[NddlInterpreter:nddl]Evaluating:RuleFactory MoveBehavior.Inactive
+[NddlInterpreter:nddl]Evaluating:class Navigator extends extends Behavior {
+
+    Navigator:Mode
+
+    Navigator.Inactive string->frame_id float->qw float->qx float->qy float->qz float->time_stamp float->x float->y float->z
+    Navigator.Active string->frame_id float->qw float->qx float->qy float->qz float->time_stamp float->x float->y float->z
+}
+
+[NddlInterpreter]Parsing rule for:Navigator.Inactive
+[NddlInterpreter:nddl]Evaluating:RuleFactory Navigator.Inactive
+[NddlInterpreter:nddl]Evaluating:float DOORMAN_DURATION_BOUND {CONSTANT float float:CLOSED[20.000000000000000, 20.000000000000000]}
+
+[NddlInterpreter:nddl]Evaluating:float DRIVER_DURATION_BOUND {CONSTANT float float:CLOSED[6000.000000000000000, 6000.000000000000000]}
+
+[NddlInterpreter:nddl]Evaluating:class NavController extends extends AgentTimeline {
+
+    NavController
+    NavController:Mode
+
+    NavController.Holds bool->active float->x float->y
+}
+
+[NddlInterpreter:nddl]Evaluating:Navigator navigator {NEW_OBJECT navigator(Navigator) {CONSTANT Mode Mode:CLOSED{Internal}} }
+
+[NddlInterpreter:nddl]Evaluating:NavController nav_controller {NEW_OBJECT nav_controller(NavController) {CONSTANT Mode Mode:CLOSED{Internal}} }
+
+[NddlInterpreter:nddl]Evaluating:MoveBehavior driver {NEW_OBJECT driver(MoveBehavior) {CONSTANT Mode Mode:CLOSED{External}} }
+
+[NddlInterpreter:nddl]Evaluating:MoveBehavior doorman {NEW_OBJECT doorman(MoveBehavior) {CONSTANT Mode Mode:CLOSED{External}} }
+
+[NddlInterpreter:nddl]Evaluating:BaseState base_state {NEW_OBJECT base_state(BaseState) {CONSTANT Mode Mode:CLOSED{External}} }
+
+[NddlInterpreter]Parsing rule for:Navigator.Active
+[NddlInterpreter:nddl]Evaluating:RuleFactory Navigator.Active
+[NddlInterpreter]Parsing rule for:NavController.Holds
+[NddlInterpreter:nddl]Evaluating:RuleFactory NavController.Holds
+[NddlInterpreter]Parsing rule for:MoveBehavior.Inactive
+[NddlInterpreter:nddl]Evaluating:RuleFactory MoveBehavior.Inactive
+[NddlInterpreter:nddl]Evaluating:VAR_METHOD:close
+[ExportReactorState][navigator][0]Success.
+[trex:info:planning]Step: depth == 0 count == 0
+[trex:info:planning][navigator][0]COMPLETED 
+[ExportReactorState][navigator][1]Success.
+[trex:info:planning]Step: depth == 0 count == 0
+[trex:info:planning][navigator][1]COMPLETED 
+[ExportReactorState][navigator][2]Success.
+[trex:info:planning]Step: depth == 0 count == 0
+[trex:info:planning][navigator][2]COMPLETED 
+[ExportReactorState][navigator][3]Success.
+[trex:info:planning]Step: depth == 0 count == 0
+[trex:info:planning][navigator][3]COMPLETED 
+[ExportReactorState][navigator][4]Success.
+[trex:info:planning]Step: depth == 0 count == 0
+[trex:info:planning][navigator][4]COMPLETED 
+[ExportReactorState][navigator][5]Success.
+[trex:info:planning]Step: depth == 0 count == 0
+[trex:info:planning][navigator][5]COMPLETED 
+[ExportReactorState][navigator][6]Success.
+[trex:info:planning]Step: depth == 0 count == 0
+[trex:info:planning][navigator][6]COMPLETED 
+[ExportReactorState][navigator][7]Success.
+[trex:info:planning]Step: depth == 0 count == 0
+[trex:info:planning][navigator][7]COMPLETED 
+[ExportReactorState][navigator][8]Success.
+[trex:info:planning]Step: depth == 0 count == 0
+[trex:info:planning][navigator][8]COMPLETED 

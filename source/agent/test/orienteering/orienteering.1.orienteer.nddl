@@ -1,0 +1,12 @@
+#include "GamePlay.nddl"
+
+
+Counter counter = new Counter(Internal);
+OrienteeringTimeline ostimeline = new OrienteeringTimeline(Internal);
+
+
+close();
+fact(ostimeline.Inactive pos);
+pos.x = 30.0;
+pos.y = 30.0;
+

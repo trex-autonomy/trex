@@ -1,0 +1,12 @@
+#include "GamePlay.nddl"
+SimpleTestForDispatchTime foo = new SimpleTestForDispatchTime(Mode.Internal);
+
+close();
+
+// This fact should be constructed safely because it will never be dispatched and thus there will
+// be no inconsistency with the dispatch_time
+fact(foo.p f);
+
+
+
+

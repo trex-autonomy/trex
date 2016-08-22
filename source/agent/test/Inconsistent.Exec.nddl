@@ -1,0 +1,17 @@
+/**
+ * There are 2 internal timelines. The first includes a fact. The second includes a goal that is inconsistent
+ * with the fact. Because repair no longer searches, both requested values will be dropped and default values placed in
+ * their stead to fill the gaps
+ */
+
+#include "GamePlay.nddl"
+
+B_Timeline a = new B_Timeline(Mode.Internal);
+B_Timeline b = new B_Timeline(Mode.Internal);
+
+close();
+
+fact(a.pred1 f);
+
+rejectable(b.pred1 g);
+g.start = 0;

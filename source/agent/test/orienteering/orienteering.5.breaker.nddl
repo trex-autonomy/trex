@@ -1,0 +1,21 @@
+#include "GamePlay.nddl"
+
+
+
+Counter counterA = new Counter(Ignore);
+Counter counterB = new Counter(Ignore);
+Counter counterC = new Counter(Ignore);
+Counter counterD = new Counter(Ignore);
+OrienteeringTimeline ostimeline = new OrienteeringTimeline(Internal);
+
+
+close();
+
+fact(ostimeline.Inactive pos);
+pos.x = 30.0;
+pos.y = 30.0;
+
+
+
+
+

@@ -1,0 +1,12 @@
+/**
+ * Use a single timeline where the model produces gaps. Ensure that the gaps are filled during execution with
+ * 'undefined' tokens.
+ */
+
+#include "GamePlay.nddl"
+
+SensorTimeline sensor = new SensorTimeline(Mode.External);
+
+DerivedTimeline derived = new DerivedTimeline(Mode.Internal);
+
+close();

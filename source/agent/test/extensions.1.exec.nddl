@@ -1,0 +1,11 @@
+#include "extensions.nddl"
+
+TestBehavior::Active{
+  starts(Iterator.Holds it);
+  it.active == true;
+}
+
+// A goal that should be timed out.
+rejectable(test_behavior.Active g0);
+g0.max_duration = 3;
+g0.start = 1;

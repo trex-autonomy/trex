@@ -1,0 +1,9 @@
+#include "GamePlay.nddl"
+
+Valve valve = new Valve(Mode.External);
+
+close();
+
+rejectable(valve.Open v);
+v.start = 5;
+

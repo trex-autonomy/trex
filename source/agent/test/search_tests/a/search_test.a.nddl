@@ -1,0 +1,13 @@
+#include "GamePlay.nddl"
+
+
+
+Valve a = new Valve(Mode.Internal);
+
+close();
+
+fact(a.Open at);
+
+
+
+

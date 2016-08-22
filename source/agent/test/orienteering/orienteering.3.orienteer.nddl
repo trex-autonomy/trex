@@ -1,0 +1,37 @@
+#include "GamePlay.nddl"
+
+
+
+Counter counterA = new Counter(Internal);
+Counter counterB = new Counter(Internal);
+Counter counterC = new Counter(Internal);
+OrienteeringTimeline ostimeline = new OrienteeringTimeline(Internal);
+
+
+close();
+fact(ostimeline.Inactive pos);
+pos.x = 30.0;
+pos.y = 30.0;
+
+
+rejectable(ostimeline.Active g0);
+g0.x = 24.4;
+g0.y = 18.8;
+g0.priority = 1;
+g0.value = 0;
+g0.countertimeline = counterA;
+
+rejectable(ostimeline.Active g1);
+g1.x = 21.1;
+g1.y = 14.5;
+g1.priority = 0;
+g1.value = 1;
+g1.countertimeline = counterB;
+
+rejectable(ostimeline.Active g2);
+g2.x = 22.9;
+g2.y = 11.3;
+g2.priority = 2;
+g2.value = 499; //So it will be rejected.
+g2.countertimeline = counterC;
+

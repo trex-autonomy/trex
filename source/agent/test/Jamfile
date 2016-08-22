@@ -1,0 +1,18 @@
+SubDir TREX agent test ;
+
+if ! $(TREX_READY) {
+
+ # Uncomment this if you want to run scalability tests
+ # include [ FDirName $(TREX) agent test s.jam ] ;
+
+ # Create a build target for synch problem generator
+ # synch-problem-generator width height growth I E
+ # Outputs:
+ # 1. synch.width.height.growth.I.E.cfg
+ # 2. synch.width.height.growth.i.j.nddl
+
+
+ # Create a build target for module tests
+ ModuleMain agent-module-tests : module-tests.cc GamePlayAdapter.cc RecallAdapter.cc ActionAdapter.cc : TREX : agent-module-tests ;
+ RunModuleMain run-agent-module-tests : agent-module-tests ;
+}

@@ -1,0 +1,12 @@
+1276	driver	I
+1067	arms_tucked	E
+1090	tilt_laser_ready	E
+1113	gripper_free	E
+1133	laser_tilt_mechanism	E
+1151	right_arm_mechanism	E
+1169	right_gripper_mechanism	E
+1190	safety_tuck_arms	E
+1213	set_laser_tilt	E
+1236	release_handle	E
+1256	head_mechanism	E
+1299	move_base	E

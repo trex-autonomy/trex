@@ -1,0 +1,53 @@
+1898	doorman	I
+	1995	MoveBehavior.Inactive	0	0	2	2.68435e+08
+1915	door_controller	I
+	1944	DoorController.Inactive	0	0	2	2.68435e+08
+1930	door_state	I
+	5376	DoorState.Holds	0	0	2	2.68435e+08
+1363	arms_tucked	E
+	4729	ArmsTucked.False	0	0	2	2.68435e+08
+1386	tilt_laser_ready	E
+	4771	TiltLaserReady.False	0	0	2	2.68435e+08
+1409	gripper_free	E
+	4813	GripperFree.True	0	0	2	2.68435e+08
+1429	laser_tilt_mechanism	E
+	4966	TiltLaserMechanism.uncontrolled	0	0	2	2.68435e+08
+1447	right_arm_mechanism	E
+	5008	RightArmMechanism.uncontrolled	0	0	2	2.68435e+08
+1465	right_gripper_mechanism	E
+	5050	RightGripperMechanism.uncontrolled	0	0	2	2.68435e+08
+1486	safety_tuck_arms	E
+	3383	SafetyTuckArms.Inactive	0	0	2	2.68435e+08
+1509	set_laser_tilt	E
+	4384	SetLaserTilt.Inactive	0	0	2	2.68435e+08
+1532	release_handle	E
+	4130	ReleaseHandle.Inactive	0	0	2	2.68435e+08
+1552	head_mechanism	E
+	4924	HeadMechanism.uncontrolled	0	0	2	2.68435e+08
+1579	stop_action	E
+	3822	StopAction.Inactive	0	0	2	2.68435e+08
+1603	open_door	E
+	3617	OpenDoor.Inactive	0	0	2	2.68435e+08
+1628	grasp_handle	E
+	3951	GraspHandle.Inactive	0	0	2	2.68435e+08
+1653	touch_door	E
+	3699	TouchDoor.Inactive	0	0	2	2.68435e+08
+1678	push_door	E
+	3781	PushDoor.Inactive	0	0	2	2.68435e+08
+1703	check_path	E
+	3837	CheckPath.Inactive	0	0	2	2.68435e+08
+1728	move_base	E
+	3524	MoveBase.Inactive	0	0	2	2.68435e+08
+1753	move_base_local	E
+	3428	MoveBase.Inactive	0	0	2	2.68435e+08
+1778	move_base_door	E
+	4175	MoveBaseDoor.Inactive	0	0	2	2.68435e+08
+1804	unlatch_handle	E
+	4033	UnlatchHandle.Inactive	0	0	2	2.68435e+08
+1831	detect_handle	E
+	3910	DetectHandle.Inactive	0	0	2	2.68435e+08
+1858	detect_door	E
+	3869	DetectDoor.Inactive	0	0	2	2.68435e+08
+1979	base_state	E
+	4475	BaseState.Holds	0	0	1	1
+	6347	BaseState.Holds	1	1	2	2.68435e+08

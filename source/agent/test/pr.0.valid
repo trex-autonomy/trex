@@ -1,0 +1,7 @@
+0 NOTIFY  check_path CheckPath.Inactive
+0 NOTIFY  doorman Doorman.Inactive
+0 NOTIFY  door_controller DoorController.Inactive
+1 REQUEST doorman Doorman.Active
+1 REQUEST check_path CheckPath.Active
+9 RECALL check_path CheckPath.Active
+9 RECALL doorman Doorman.Active

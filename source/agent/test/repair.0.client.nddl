@@ -1,0 +1,18 @@
+#include "GamePlay.nddl"
+
+ValueTimeline var = new ValueTimeline(Mode.External);
+
+close();
+
+// This will be synchronized with the initial observation, but restricted to end
+// at tick 2. Such a completion time will not be honored by the server since it is
+// going to be merged onto a current observation. No dispatch will be posted for this.
+rejectable(var.Holds g0);
+g0.end = 2;
+
+// This goal will be dispacthed and will have to be recalled when the plan fails. The recovery
+// should still be able to handle this goal and thus it will be dispatched again, planned, and this time should complete
+// without a problem. When this one terminates, the result should be a switch into its default value
+rejectable(var.Holds g1);
+g1.start = 5;
+g1.end = 7;

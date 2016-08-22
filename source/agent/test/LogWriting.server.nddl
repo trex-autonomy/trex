@@ -1,0 +1,16 @@
+/**
+ * Simply wait for observations
+ */
+
+#include "GamePlay.nddl"
+
+LogTesting log_writing = new LogTesting(Internal);
+
+close();
+
+fact(log_writing.Holds f);
+f.p_bool = true;
+f.p_int = 1;
+f.p_float = 10.265;
+f.p_string = "Some fine string";
+f.p_symbol = Rock;

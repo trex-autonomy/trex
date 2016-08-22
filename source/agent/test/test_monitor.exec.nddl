@@ -1,0 +1,22 @@
+#include "GamePlay.nddl"
+
+ValueTimeline values = new ValueTimeline(Mode.Internal);
+
+close();
+
+// The first goal will be feasible
+rejectable(values.Holds g0);
+
+rejectable(values.Holds c0);
+assertCompleted(c0.state);
+
+// The second goal will be infeasible because we set a magic number that will be inconsistent when the goal is activated
+rejectable(values.Holds g1);
+g1.value = 1111;
+
+rejectable(values.Holds c1);
+c1.value = 1111;
+assertRejected(c1.state);
+
+
+

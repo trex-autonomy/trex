@@ -1,0 +1,14 @@
+/**
+ * This will demonstrate the decomposition of the goal on the values timeline into an action will
+ * be scoped out of deliberation and synchronization
+ */
+
+#include "GamePlay.nddl"
+
+TestActions client_actions = new TestActions();
+ValueTimeline values = new ValueTimeline(Mode.External);
+
+close();
+
+rejectable(values.Holds v);
+v.value = 1000;

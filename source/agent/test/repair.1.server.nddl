@@ -1,0 +1,7 @@
+#include "GamePlay.nddl"
+
+Valve valve = new Valve(Mode.Internal);
+
+close();
+
+fact(valve.Closed);

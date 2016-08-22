@@ -1,0 +1,12 @@
+#include "synch.nddl"
+
+MasterAction master_action = new MasterAction(Internal);
+SlaveAction slave_action = new SlaveAction(External);
+
+close();
+
+fact(master_action.Inactive);
+
+rejectable(master_action.Active g);
+g.start = 2;
+

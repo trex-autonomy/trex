@@ -1,0 +1,8 @@
+#include "GamePlay.nddl"
+
+ValueTimeline var = new ValueTimeline(Mode.Internal);
+Counter counter = new Counter(Mode.Ignore);
+
+close();
+
+fact(var.Holds h);

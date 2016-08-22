@@ -1,0 +1,26 @@
+/**
+ * Simple goal to grasp. Should trigger an iterator. Will finish when observed position
+ * is the same as the target. The iterator is designed to be conditioned on feedback to
+ * determine when it should finish, and we force it to only get the expected feedback event
+ * at tick 7. Thus we will keep trying additional actions.
+ */
+
+#include "GamePlay.nddl"
+
+TestActions actions = new TestActions();
+GraspObject grasper = new GraspObject(Internal);
+Position pos = new Position(External);
+
+eq(TICK_DURATION, 1.0);
+
+GraspObject::Active {
+  // This should never fire, but it will test that the comparator is being set correctly
+  if(object == pos){
+    eq(1, 0);
+  }
+}
+
+close();
+
+rejectable(grasper.Active g);
+g.x = 10;

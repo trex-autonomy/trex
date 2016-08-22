@@ -1,0 +1,11 @@
+922	navigator	I
+	5850	Navigator.Inactive	0	0	3	2.68435e+08
+940	nav_controller	I
+	5821	NavController.Holds	0	0	3	2.68435e+08
+959	driver	E
+	5194	MoveBehavior.Inactive	0	0	3	2.68435e+08
+980	doorman	E
+	5459	MoveBehavior.Inactive	0	0	3	2.68435e+08
+1003	base_state	E
+	6324	BaseState.Holds	1	1	2	2
+	6409	BaseState.Holds	2	2	3	2.68435e+08

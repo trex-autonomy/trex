@@ -1,0 +1,12 @@
+#include "GamePlay.nddl"
+SimpleTestForDispatchTime foo = new SimpleTestForDispatchTime(Mode.External);
+
+close();
+
+// This goal should never be feasible since once dispatched, it will be inconsistent
+rejectable(foo.p g);
+g.start = 2;
+
+
+
+

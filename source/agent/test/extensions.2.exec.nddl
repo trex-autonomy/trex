@@ -1,0 +1,67 @@
+#include "extensions.nddl"
+
+// All will have a fixed duration
+TestBehavior::Active{
+  duration == 3;
+}
+
+
+MasterBehavior::Active{
+  if(test_case_id == 1){
+    contains(test_behavior.Active);
+  }
+  if(test_case_id == 2){
+    ends(test_behavior.Active);
+  }
+  if(test_case_id == 3){
+    starts(test_behavior.Active);
+  }
+  if(test_case_id == 4){
+    starts_during(test_behavior.Active);
+  }
+  if(test_case_id == 5){
+    equals(test_behavior.Active);
+  }
+  if(test_case_id == 6){
+    contained_by(test_behavior.Active);
+  }
+  if(test_case_id == 7){
+    ends_during(test_behavior.Active);
+  }
+}
+
+// A pair of goals for each case to verify preemption and non-preemption
+// Should be preempted
+rejectable(master_behavior.Active g0);
+g0.max_duration = 1;
+g0.test_case_id = 1;
+g0.start = 1;
+rejectable(master_behavior.Active g1);
+g1.test_case_id = 1;
+g1.start = 5;
+
+// Should cause preemption of test
+rejectable(master_behavior.Active g2);
+g2.max_duration = 1;
+g2.test_case_id = 2;
+g2.start = 10;
+
+// Should not cause preemption of test
+rejectable(master_behavior.Active g3);
+g3.max_duration = 1;
+g3.test_case_id = 3;
+g3.start = 20;
+
+// Should not cause preemption of test
+rejectable(master_behavior.Active g4);
+g4.max_duration = 1;
+g4.test_case_id = 4;
+g4.start = 30;
+
+// Should cause preemption of test
+rejectable(master_behavior.Active g5);
+g5.max_duration = 1;
+g5.test_case_id = 5;
+g5.start = 40;
+
+

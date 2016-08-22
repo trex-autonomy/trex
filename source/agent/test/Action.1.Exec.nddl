@@ -1,0 +1,17 @@
+/**
+ * This will demonstrate the decomposition of a goal into and action will successfully apply since the master is internal
+ */
+
+#include "GamePlay.nddl"
+
+TestActions actions = new TestActions();
+Counter counter = new Counter(Mode.Internal);
+ValueTimeline values = new ValueTimeline(Mode.Internal);
+
+close();
+
+fact(counter.Holds f);
+f.value = 0;
+
+rejectable(values.Holds v);
+v.value = 100;

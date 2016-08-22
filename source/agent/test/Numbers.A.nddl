@@ -1,0 +1,9 @@
+#include "GamePlay.nddl"
+
+NumberTimeline n = new NumberTimeline(Mode.Internal);
+
+close();
+
+// Fact: at start, n == holds(0)
+fact(n.holds g);
+g.value=0;

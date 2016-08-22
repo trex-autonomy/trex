@@ -1,0 +1,17 @@
+#include "GamePlay.nddl"
+
+Player player1 = new Player(Mode.External, Mode.External);
+Player player2 = new Player(Mode.External, Mode.External);
+Umpire umpire = new Umpire(player1, player2, Mode.Internal);
+
+close();
+
+// Set initial fact
+fact(umpire.Wait init);
+
+rejectable(umpire.PlayGame game0);
+precedes(20, game0.start);
+precedes(game0.end, 30);
+
+
+

@@ -1,0 +1,2 @@
+#summary Illustration of key ideas behind T-REX through an real-world example in the mobile manipulation domain
+= To Do =

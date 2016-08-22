@@ -1,0 +1,48 @@
+#include "TREX.nddl"
+
+/**
+ * Here is an example of a state machine where we have a circuit breaker open or closed. The example will utilize a behavior
+ * and require it to be successful inorder to transition. Anytime it is open, we want it closed.
+ */
+class CircuitBreaker extends AgentTimeline {
+  predicate Open{}
+  predicate Closed{}
+
+  CircuitBreaker(){ super(Internal, "Open"); }
+};
+
+class ResetCircuitBreaker extends AgentAction {
+  ResetCircuitBreaker(Mode m) { super(m); }
+};
+
+/** RULES */
+
+CircuitBreaker::Open{
+  meets(Closed);
+  contains_start(ResetCircuitBreaker.Active cmd);
+  ends cmd;
+  // Constrain to be successful. This will force a retry if it is not satisfied
+  isSucceded(cmd.object) == true;
+}
+
+/**
+ * Here is an example of an action that will require a sub action to end it.
+ */
+class MasterAction extends AgentAction {
+
+  MasterAction(Mode _mode){
+    super(_mode);
+  }
+};
+
+class SlaveAction extends AgentAction {
+
+  SlaveAction(Mode _mode){
+    super(_mode);
+  }
+};
+
+MasterAction::Active{
+  duration <= 2;
+  ends(SlaveAction.Active);
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" standalone="no"?>
+
+<Log date="Mon Jun 15 18:00:58 2009">
+  <Declare>
+    <Adapter name="Server">
+      <Timeline name="log_writing"/>
+    </Adapter>
+  </Declare>
+  <Tick value="0">
+    <Observation on="log_writing" predicate="LogTesting.Holds">
+      <Assert name="p_bool">
+	<value type="bool" name="true" />
+      </Assert>
+      <Assert name="p_int">
+	<value type="int" name="1.000000" />
+      </Assert>
+      <Assert name="p_float">
+	<value type="float" name="10.265000" />
+      </Assert>
+      <Assert name="p_string">
+	<symbol type="string" value="Some fine string" />
+      </Assert>
+      <Assert name="p_symbol">
+	<symbol type="Values" value="Rock" />
+      </Assert>
+    </Observation>
+  </Tick>
+</Log>

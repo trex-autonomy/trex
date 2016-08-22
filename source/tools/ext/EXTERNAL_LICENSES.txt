@@ -1,0 +1,12 @@
+
+The following are external dependencies used by the TREX tools.
+
+xdot.py by Jose Fonseca, licensed under LGPL
+http://code.google.com/p/jrfonseca/wiki/XDot
+
+pygtkcodebuffer.py, licensed under LGPL
+http://code.google.com/p/pygtkcodebuffer:
+
+gvgen.py by INL Software, licensed under GPLv2.
+http://software.inl.fr/trac/wiki/GvGen
+NOTE ON GVGEN: We are currently trying to have the owners of gvgen switch to LGPL

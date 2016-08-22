@@ -1,0 +1,17 @@
+#include "GamePlay.nddl"
+
+MotionSimulator ms = new MotionSimulator(Internal);
+HorizontalControl hc = new HorizontalControl(Internal);
+Valve v = new Valve(Internal);
+
+close();
+
+fact(ms.Holds);
+fact(hc.Holds);
+
+/**
+ * Will force a transition of HC that will occur at tick 3.
+ */
+rejectable(ms.Holds g);
+g.start = 3;
+g.value = 1;

@@ -1,0 +1,23 @@
+/**
+ * Just holds the values timeline
+ */
+#include "GamePlay.nddl"
+
+PersistenceTest_Container p = new PersistenceTest_Container(Mode.Internal, "Off");
+
+close();
+
+rejectable(p.On a);
+rejectable(p.On b);
+rejectable(p.On c);
+rejectable(p.On d);
+rejectable(p.On e);
+rejectable(p.On f);
+rejectable(p.On g);
+
+a meets b;
+b meets c;
+c meets d;
+d meets e;
+e meets f;
+f meets g;

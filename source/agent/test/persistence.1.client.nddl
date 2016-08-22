@@ -1,0 +1,9 @@
+/**
+ * A single external timeline that is going to be repeatedly in conflict.
+ */
+
+#include "GamePlay.nddl"
+
+PersistenceTest_Container p = new PersistenceTest_Container(Mode.External, "Off");
+
+close();

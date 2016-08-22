@@ -1,0 +1,16 @@
+#include "GamePlay.nddl"
+
+
+
+CreatorTimeline ct = new CreatorTimeline(Mode.External);
+EqReciverTimeline rt = new EqReciverTimeline(Mode.External);
+
+close();
+
+//Make request beta.
+rejectable(rt.Beta beta);
+rejectable(ct.Delta delta);
+
+
+
+

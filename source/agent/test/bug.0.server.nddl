@@ -1,0 +1,9 @@
+#include "GamePlay.nddl"
+
+Position pos = new Position(Internal);
+
+close();
+
+rejectable(pos.Holds g);
+g.start = [6, 7];
+g.x = 10;

@@ -1,0 +1,13 @@
+#include "GamePlay.nddl"
+
+// Create a planner configuration instance in PLASMA.
+// Horizon Start, Horizon End, MaxPlannerSteps, MaxPlannerDepth
+PlannerConfig plannerConfiguration = new PlannerConfig(0, 100, 300, 300);
+
+Player player1 = new Player(Mode.Ignore, Mode.Ignore);
+Player player2 = new Player(Mode.Ignore, Mode.Ignore);
+Umpire umpire = new Umpire(player1, player2, Mode.Ignore);
+
+close();
+
+fact(umpire.Wait f);

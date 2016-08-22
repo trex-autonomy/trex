@@ -1,0 +1,46 @@
+#summary Outline of tutorials which are intended to teach T-REX by incremental examples which you can try out.
+
+All tutorials assume the steps in the [GetStarted Getting Started] section have been completed successfully, and that you have read the [LearnMore background material] on T-REX concepts. Individual tutorials may stipulate additional pre-requisites. The general intention is that tutorials will be conducted in the order in which they are listed below.
+
+=Bare Essentials=
+These  tutorials will get you working with the basic elements of T-REX.
+ * [CreateProject Create a Project] - Creates and explores simple Hello World project.
+ * [DemoTest Use the Test Harness] - Demonstrates running the test harness and illustrates its main components.
+ * [DemoExecutionMonitor Visualize Prior Execution] - Shows you how to visualize logged data using [Tools#trexmonitor trexmonitor]. 
+ * [DemoInteraction Interactive Execution and Visualization ] - Use [Tools#trexrun trexrun] to step through the agent incrementally, and use advanced visualization to explore execution state.
+= The HandyBot =
+You are now ready to apply T-REX to more interesting situations. For this set of tutorials, we imagine *HandyBot*, a fictitious robot, which we will empower incrementally to do increasingly sophisticated things, albeit in a simulated world. Handybot, and the material in this section, is inspired by experiences in mobile manipulation with the [http://www.willowgarage.com/pages/robots/pr2-overview PR2] driving around an office, opening doors, and plugging itself in [http://www.willowgarage.com/blog/2009/06/03/watch-milestone-2 fully autonomously].
+ * [AgentActions Introducting agent actions] - You will learn about and use a standard model element in T-REX for dealing with actions.
+ * [ActionSequence Create and run an action sequence] - You will learn how to create a new test case to create and ordered set of actions to execute.
+ * [ActionInteractions Co-ordinate concurrent action execution] - Many times, more than one thing can and/or should be done at a time. In this tutorial you will update your *HandyBot* model to demonstrate this capability.
+ * [Regression Working backwards from the goal] - At times a programmer only cares about the next goal to achieve, and would prefer to let the system fill in the blanks on how to do that. In this tutorial you will build an example that leverages the T-REX planner to work backwards from a goal to do exactly that.
+ * [ConditionalExecution Conditional execution based on action feedback] - Sometimes it is better to wait till we discover the outcome of executing an action rather than plan too far ahead. In this tutorial you will implement a control strategy that branches base on action feedback.
+ * [Preemption Preempting actions] - In this tutorial you will learn how to bound the duration of an action, and how to check for preemption.
+ * [Orienteering Planning for multiple objectives] - In this tutorial you will learn to integrate high level planning with lower level reactive control by using the Orienteering Solver to plan multiple goals to achieve around the office.
+=Integration with external actions=
+ * [TrivialReactor Create a custom reactor for an external action] - Explains the AgentActionAdapter base class and walks you through implementing a simple sub-class of your own to integrate external actions and internal
+ * [IntegratedReactor  Integrate your reactor] - Walks you through integrating your reactor into a model and in the executive.
+=Basic Trouble-Shooting=
+These tutorials will focus on using the Execution Monitor in conjunction with different debugging strategies to identify and debug problems.
+ * [DemoDebugFile Control Debug Output] - Illustrates the use of high-fidelity debugging for inspecting execution state.
+ * How to use the Token Network Viewer
+ * Detecting and fixing constraint violations
+ * Detecting and fixing an over-constrained model
+ * Detecting and fixing an under constrained model
+=Design Patterns=
+These tutorials will introduce you to common modeling approaches for modeling problem domains.
+ * Implementing a State Machine
+ * Implementing an Iterator
+ * Value Abstraction
+ * Handling Timeouts
+=Testing=
+These tutorials will introduce different testing techniques you can use.
+ * Capturing an event log
+ * Validating against an event log
+ * Specifying expected execution conditions
+ * Building a NDDL simulator
+=Advanced Topics=
+These tutorials focus on more advanced techniques that involve a deeper knowledge of EUROPA.
+ * Implementing a constraint
+ * Using the orienteering solver
+ * Configuring the standard EUROPA solver

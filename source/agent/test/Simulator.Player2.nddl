@@ -1,0 +1,10 @@
+#include "GamePlay.nddl"
+
+Player player2 = new Player(Mode.Internal , Mode.Internal);
+close();
+
+// fact at start : player2 == Wait
+fact(player2.Wait fact1);
+
+// fact at start : player2.hand == Hides
+fact(player2.hand.Hides fact2);

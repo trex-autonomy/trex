@@ -1,0 +1,6 @@
+#include "personal_robots/model.nddl"
+
+Doorman doorman = new Doorman(External);
+
+// Post a goal
+rejectable(doorman.Active);

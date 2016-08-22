@@ -1,0 +1,12 @@
+#include "GamePlay.nddl"
+
+NumberTimeline n = new NumberTimeline(Mode.External);
+
+close();
+
+// goal in [0 10] : n = holds(4);
+rejectable(n.holds g);
+g.value = 4;
+
+// Constrain to insert into the plan to prevent merging into the execution frontier.
+eq(g.state, ACTIVE);

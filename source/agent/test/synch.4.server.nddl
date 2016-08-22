@@ -1,0 +1,9 @@
+#include "synch.nddl"
+
+SlaveAction slave_action = new SlaveAction(Internal);
+
+close();
+
+fact(slave_action.Active f);
+f.end = 9;
+

@@ -1,0 +1,17 @@
+/**
+ * This will demonstrate recovery from a model failure by exploiting the persistence model
+ * of state variables. Valves are used to capture values, but we permite the case of a valve
+ * being persistent vs. not persistent and internal vs. external
+ */
+
+#include "GamePlay.nddl"
+
+PersistenceTest_Container p = new PersistenceTest_Container(Mode.Internal, "Inactive");
+Valve vo = new Valve(Mode.Internal, true);
+Valve v1 = new Valve(Mode.Internal, false);
+Valve v2 = new Valve(Mode.External);
+
+close();
+
+rejectable(p.Active g);
+g.start=5;

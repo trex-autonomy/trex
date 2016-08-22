@@ -1,0 +1,13 @@
+#include "GamePlay.nddl"
+
+
+
+CreatorTimeline a = new CreatorTimeline(Mode.Internal);
+
+close();
+
+//Make a "gamma" token in the timeline.
+fact(a.Gamma at);
+at.end = 2;
+
+

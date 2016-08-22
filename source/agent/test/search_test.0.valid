@@ -1,0 +1,3 @@
+0 NOTIFY  a Valve.Open
+0 NOTIFY  b CreatorTimeline.Delta
+4 NOTIFY  b CreatorTimeline.undefined

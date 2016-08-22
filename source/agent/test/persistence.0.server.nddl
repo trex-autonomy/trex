@@ -1,0 +1,6 @@
+/**
+ * Just holds the values timeline
+ */
+#include "GamePlay.nddl"
+Valve v2 = new Valve(Mode.Internal, true);
+close();

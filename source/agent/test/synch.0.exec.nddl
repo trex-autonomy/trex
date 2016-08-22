@@ -1,0 +1,10 @@
+#include "GamePlay.nddl"
+
+MotionSimulator ms = new MotionSimulator(Internal);
+HorizontalControl hc = new HorizontalControl(Internal);
+Valve v = new Valve(Internal);
+
+close();
+
+fact(ms.Holds);
+fact(hc.Holds);

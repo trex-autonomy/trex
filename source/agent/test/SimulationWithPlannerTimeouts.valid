@@ -1,0 +1,5 @@
+0 NOTIFY  player1.hand PlayerState.Hides
+0 NOTIFY  player1 Player.Wait
+0 NOTIFY  player2.hand PlayerState.Hides
+0 NOTIFY  player2 Player.Wait
+0 NOTIFY  umpire Umpire.Wait

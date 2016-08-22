@@ -1,0 +1,11 @@
+#include "GamePlay.nddl"
+
+ValveController vc = new ValveController(Mode.Internal);
+Valve valve = new Valve(Mode.External);
+
+close();
+
+fact(vc.ValveStaysClosed g);
+g.start = 0;
+leq(6, g.duration);
+

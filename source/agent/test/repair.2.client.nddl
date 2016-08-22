@@ -1,0 +1,16 @@
+#include "GamePlay.nddl"
+
+ValveController vc = new ValveController(Mode.Internal);
+Valve valve = new Valve(Mode.External);
+
+close();
+
+/**
+ * This token is fundamentally inconsistent. But we do not discover that until we execute it.
+ * The question is - do we care about that? If the model is inconsistent, can we reliably reset values?
+ * The answer I believe is no - it is just a shot in the dark. So we will not permit a recovery in a case like this.
+ * Instead we should consider the reactor terminated and remove it from the agent, along with any of its dependents.
+ */
+rejectable(vc.InconsistentSlavesInExecution g);
+g.start = 2;
+

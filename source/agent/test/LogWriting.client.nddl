@@ -1,0 +1,9 @@
+/**
+ * Simply wait for observations
+ */
+
+#include "GamePlay.nddl"
+
+LogTesting log_writing = new LogTesting(External);
+
+close();

@@ -1,0 +1,8 @@
+#include "synch.nddl"
+
+
+CircuitBreaker cb = new CircuitBreaker();
+ResetCircuitBreaker rcb = new ResetCircuitBreaker(External);
+
+fact(cb.Open);
+

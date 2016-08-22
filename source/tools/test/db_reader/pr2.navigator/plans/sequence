@@ -1,0 +1,444 @@
+/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/logs/2009.236.5/pr2.navigator/plans1251134926541--begin /wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex/TREX/agent/base/TREX.nddl
+
+// Declare enumeration for Token States
+enum TokenStates {INACTIVE, ACTIVE, MERGED, REJECTED}
+
+
+// Declare built in constraints used for common TREX use cases
+constraint default(var, value) { var <: value }
+constraint defaultOnCommit(var, value) { var <: value }
+constraint assertCompleted(s) { s <: TokenStates }
+constraint assertRejected(s) { s <: TokenStates }
+
+
+// Declare a marker class to indicate the base class should be a Timeline
+// which enforces a total order. This should only arise where we
+// have predicates!
+class Timeline {}
+
+/**
+ * The TICK DURATION in seconds. It will be set when the deliberative reactor is loaded
+ */
+float TICK_DURATION;
+
+/**
+ * This MISSION_END will be set when a deliberative reactor is loaded. It is mapped to the agent horizon
+ */
+int MISSION_END;
+
+/**
+ * The AGENT_CLOCK will capture clock tick events for propagation purposes
+ */
+int AGENT_CLOCK;
+
+enum Mode {
+  External, 	// Synchronize observations and dispatch plans as goals
+  Internal, 	// Publish updates at the current tick
+  Ignore	// Not synchronized at all (can be deprecated?)
+}
+
+class AgentTimeline extends Timeline {
+  Mode mode; // Indicate if an internal or external timeline
+  string defaultPredicate; // Sets the default predicate value for filling out an emty timeline and resettting
+  bool persistent; // Indicate if the current value can be discarded on a reset to recover
+
+  /**
+   * A predicate to reflect that the timeline is undefined. Used to fill gaps
+   * where they occur.
+   */
+  predicate undefined{};
+
+  /**
+   * A predicate which is used to block any successor states for a timeline
+   */
+  predicate Terminated{concurrent(end, MISSION_END);}
+
+  AgentTimeline(Mode _mode){
+    mode = _mode;
+    defaultPredicate = "undefined";
+    persistent = true;
+  }
+
+  AgentTimeline(Mode _mode, string _defaultPredicate){
+    mode = _mode;
+    defaultPredicate = _defaultPredicate;
+    persistent = true;
+  }
+
+  AgentTimeline(Mode _mode, string _defaultPredicate, bool _persistent){
+    mode = _mode;
+    defaultPredicate = _defaultPredicate;
+    persistent = _persistent;
+  }
+};
+
+/**
+ * Base class for actions. These will never be exchanged across reactors and are generated to
+ * accomplisg goals. This is a construct of a deliberative reactor
+ */
+class AgentActions {
+  /**
+   * This action supports a common idiom to indicate we want something to happen proactively.
+   */
+  predicate startEvent{ eq(duration, 1); }
+
+  AgentActions(){}
+};
+
+class StateVariable extends AgentTimeline{
+ 	predicate Holds{ eq(duration, 1); }
+ 	StateVariable(Mode _mode){super(_mode);}
+	StateVariable(Mode _mode, string _defaultPredicate){super(_mode, _defaultPredicate);}
+};
+
+enum ResultStatus {
+  UNDEFINED,  // Used when the behavior becomes inactive in an undefined state, such as when rebooting
+  SUCCESS,    // Indicates the behavior terminated, accomplsihing its goals. Or so it believes!
+  ABORTED,    // Means the behavior aborted pursuit of its goal of its own volition
+  PREEMPTED   // Means the behavior terminated on command from a client.
+};
+
+/**
+ * Encapsulate Behaviors that have a state of active or inactive
+ */
+class Behavior extends AgentTimeline {
+
+  predicate Inactive{
+    ResultStatus status;
+  }
+
+  predicate Active{
+    int dispatch_time; // The time at which the goal was dispatched
+    int max_duration; // If duration exceeds this, the token should be preempted.
+    precedes(dispatch_time, start); // This is a <= constraint, but we use explicit temporal construct instead.
+    temporalDistance(start, [1, +inf], MISSION_END); // Behaviors must start before the mission ends
+    trex_behavior(object); // Maintains connection between this token and its parent, if also a behavior. Use this to propagate max duration bounds.
+  }
+
+  Behavior(Mode _mode){
+    super(_mode, "Inactive", false);
+  }
+};
+
+Behavior::Active{
+  meets(Inactive _reserved_s);
+  // This is generic where behaviors are contained
+  max_duration <= end - start;
+}
+
+Behavior::Inactive{
+  defaultOnCommit(status, UNDEFINED);
+}
+--begin /wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/common/move_behavior.nddl
+#include "TREX.nddl"
+#include "world_model/topological_map.nddl"
+
+/**
+ * The MoveBehavior is an abstract class that handles navigation towards a goal. A mode paramter
+ * will be used to indicate the type of concrete class to use.
+ */
+class MoveBehavior extends Behavior {
+  predicate Inactive{
+    string frame_id;
+    float time_stamp;
+    float x;
+    float y;
+    float z;
+    float qx;
+    float qy;
+    float qz;
+    float qw;
+  }
+
+  // Parameters to get to the target
+  predicate Active {
+    string frame_id;
+    float time_stamp;
+    float x;
+    float y;
+    float z;
+    float qx;
+    float qy;
+    float qz;
+    float qw;
+    MAP_KEY start_connector;
+  }
+
+  MoveBehavior(Mode _mode){
+    super(_mode);
+  }
+};
+
+/**
+ * If the move is successful, bind parameters based on the active pose pursued.
+ */
+MoveBehavior::Inactive{
+  if(status == SUCCESS){
+    met_by(Active p);
+    eq_pose_msg(object, p.object);
+  }
+}
+
+--begin /wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/navigator/exports.nddl
+#include "TREX.nddl"
+
+class Navigator extends Behavior {
+  predicate Inactive{}
+
+  predicate Active{
+    string frame_id;
+    float time_stamp;
+    float x;
+    float y;
+    float z;
+    float qx;
+    float qy;
+    float qz;
+    float qw;
+
+    // Constraint must be defined here to allow x and y values to be accessible for planning.
+    defaultOnCommit(frame_id, "map");
+  }
+
+  predicate Inactive{
+    string frame_id;
+    float time_stamp;
+    float x;
+    float y;
+    float z;
+    float qx;
+    float qy;
+    float qz;
+    float qw;
+
+    // Constraint must be defined here to allow x and y values to be accessible for planning.
+    defaultOnCommit(frame_id, "map");
+  }
+
+  Navigator(Mode _mode){
+    super(_mode);
+  }
+};
+
+
+Navigator::Inactive{
+  if(status == SUCCESS){
+    met_by(Active p);
+    eq_pose_msg(object, p.object);
+  }
+}
+--begin /wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/navigator/navigator.nddl
+
+#include "TREX.nddl"
+#include "world_model/topological_map.nddl"
+#include "rcs/base_state.nddl"
+#include "common/move_behavior.nddl"
+#include "navigator/exports.nddl"
+
+float DOORMAN_DURATION_BOUND = 20.0;
+float DRIVER_DURATION_BOUND = 6000.0;
+
+class NavController extends AgentTimeline {
+  predicate Holds {
+    bool active;
+    float x;
+    float y;
+  }
+
+  NavController(){
+    super(Internal, "Holds");
+  }
+  NavController(Mode _mode){
+    super(_mode, "Holds");
+  }
+};
+
+Navigator navigator = new Navigator(Internal);
+NavController nav_controller = new NavController(Internal);
+
+MoveBehavior driver = new MoveBehavior(External);
+MoveBehavior doorman = new MoveBehavior(External);
+BaseState base_state = new BaseState(External);
+
+Navigator::Active{
+  if(isSingleton(start)){
+    starts(nav_controller.Holds nc);
+    nc.active == true;	
+    // Initialize position
+    starts_during(base_state.Holds bs);
+    nc.x == bs.x;
+    nc.y == bs.y;
+  }
+}
+
+NavController::Holds{
+  // Default based on predecessors
+  met_by(Holds p);
+  defaultOnCommit(active, p.active);
+  defaultOnCommit(x, p.x);
+  defaultOnCommit(y, p.y);
+
+  if(active == false){
+    equals(navigator.Inactive);
+  }
+  else {
+    meets(Holds s);
+
+    // Obtain navigator context
+    contained_by(navigator.Active nav_active);
+
+    float distance;
+    calcDistance(distance, x, y, nav_active.x, nav_active.y);
+
+    if(isTimedOut(nav_active.object) == true || distance < 0.2){
+      // Terminate the controller
+      meets(navigator.Inactive nav_inactive);
+      s.active == false;
+      duration == 1;
+      if(distance < 0.2){
+	nav_inactive.status == SUCCESS;
+      }
+      else {
+	nav_inactive.status == PREEMPTED;
+      }
+    }
+    else {
+      // Take the next step towards the goal. This will either navigate to the
+      // goal, or navigate to the next connector along the way. It would be
+      // ideal to be able to specify for the nav stack that we do not care
+      // about orientation, and that we want to get as close as possible to
+      // the goal, but the criteria for success is based on a given error
+      // bound. Thus we could get close if possible, but permit a successful
+      // termination when we cannot get any closer but are within that bound.
+      // This is desirable since the precise approach is based on calcuations
+      // that deal with position of approach and location of the socket or
+      // door and these are encoded internally in the domains.
+      contains_start(MoveBehavior.Active cmd);
+      ends cmd;
+      cmd.frame_id == nav_active.frame_id;
+
+      // Determine the next map point to go for. It will either be the outlet
+      // or it will be a doorway en-route to the outlet. This function calls a
+      // topological planner.
+      bool thru_doorway;
+      map_get_next_move(cmd.x, cmd.y, cmd.z, cmd.qx,
+			cmd.qy, cmd.qz, cmd.qw,
+			thru_doorway, 
+			x, y, 
+			nav_active.x, nav_active.y, nav_active.z,
+			nav_active.qx, nav_active.qy, nav_active.qz, nav_active.qw);
+
+      // Determine the connector to start from based on where we are and where we are going
+      map_get_nearest_connector(cmd.start_connector,
+				x, y,
+				nav_active.x, nav_active.y);
+
+      // Adjust for using the doorman or the driver
+      if(thru_doorway == true){
+	cmd.object == doorman;
+	cmd.max_duration <= DOORMAN_DURATION_BOUND;
+      }
+      else{
+	cmd.object == driver;
+	cmd.max_duration <= DRIVER_DURATION_BOUND;
+      }
+    }
+  }
+}
+
+MoveBehavior::Inactive{
+  starts_during(nav_controller.Holds nc);
+  if(status == SUCCESS){
+    nc.x == x;
+    nc.y == y;
+  }
+  else {
+    starts_during(navigator.Inactive nav_inactive);
+    status == nav_inactive.status;
+  }
+}
+--begin /wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_ros/nddl/ros.nddl
+#include "TREX.nddl"
+
+/**
+ * An error bound for time when preempting or when terminating.
+ */
+typedef int [-1, 1] TIME_ERROR_BOUND;
+
+/**
+ * Defines core interfaces for ROS integration
+ */
+
+/**
+ * Specialize to mark all ROS State Variables. Note that it can be internal or external, since we may choose
+ * to simulate it with NDDL.
+ */
+class ROSStateVariable extends AgentTimeline {
+
+  predicate Holds{}
+
+  ROSStateVariable(Mode _mode){ super(_mode, "Holds"); }
+  ROSStateVariable(Mode _mode, string _default_value, bool _persistent){ super(_mode, _default_value, _persistent); }
+
+  ROSStateVariable(Mode _mode, string _pred){
+    super(_mode, _pred);
+  }
+
+  ROSStateVariable(Mode _mode, string _pred, bool _opt){
+    super(_mode, _pred, _opt);
+  }
+};
+
+/**
+ * A StateMachine control structure
+ */
+class StateMachine extends AgentTimeline {
+
+  // The controller is in an inactive state. Basically idle.
+  predicate Inactive{
+    ResultStatus status;
+    // Be default will be UNDEFINED
+    defaultOnCommit(status, UNDEFINED);
+    // Should always be integrated in the mission profile
+    temporalDistance(start, [1, +inf], MISSION_END);
+  }
+  
+  StateMachine(){ super(Internal, "Inactive"); }
+  StateMachine(Mode _mode, string _default_value, bool _persistent){ super(Internal, "Inactive", _persistent); }
+};
+
+/**
+ * Specialize to mark all ROS Actions. A max_duration parameter is used
+ * to allow actions to be preempted in the ros adapter.
+ */
+class ROSAction extends Behavior {
+
+  ROSAction(Mode _mode){
+    super(_mode);
+  }
+};
+
+ROSAction::Active{
+  int time_since_dispatch;
+  dispatch_time + time_since_dispatch == start;
+  time_since_dispatch <= 100; // Magic number to break the plan if 100 ticks passes between dispatch and starting
+}
+
+/**
+ * Reusable class for boolean state variables
+ */
+class BooleanTimeline extends AgentTimeline {
+  predicate True{}
+  predicate False{};
+
+  /**
+   * Persistent by default
+   */
+  BooleanTimeline(Mode _mode, string _default_value){
+    super(_mode, _default_value, true);
+  }
+  BooleanTimeline(Mode _mode, string _default_value, bool _persistent){
+    super(_mode, _default_value, _persistent);
+  }
+};
+

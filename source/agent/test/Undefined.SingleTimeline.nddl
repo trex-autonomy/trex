@@ -1,0 +1,15 @@
+/**
+ * Use a single timeline where the model produces gaps. These gaps prohibit a plan from being integrated to
+ * execution thus exercising the code to constrain a plan to meet the execution frontier. We expect that
+ * planning fails and the original value is always extended through relaxation
+ */
+
+#include "GamePlay.nddl"
+
+CyclicTimeline timeline = new CyclicTimeline(Mode.Internal);
+
+close();
+
+// Do not place any facts
+rejectable(timeline.pred g);
+g.start = 1;

@@ -1,0 +1,8 @@
+#include "GamePlay.nddl"
+
+ScalabilityTestTimeline n0_3 = new ScalabilityTestTimeline(3,1,1,2, Mode.Internal);
+ScalabilityTestTimeline n0_2 = new ScalabilityTestTimeline(2,1,1,2, Mode.Internal);
+ScalabilityTestTimeline n0_1 = new ScalabilityTestTimeline(1,1,1,2, Mode.Internal);
+ScalabilityTestTimeline n0_0 = new ScalabilityTestTimeline(0,1,1,2, Mode.Internal);
+
+close();

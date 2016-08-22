@@ -1,0 +1,142 @@
+/*********************************************************************
+* Software License Agreement (BSD License)
+* 
+*  Copyright (c) 2007. MBARI.
+*  All rights reserved.
+* 
+*  Redistribution and use in source and binary forms, with or without
+*  modification, are permitted provided that the following conditions
+*  are met:
+* 
+*   * Redistributions of source code must retain the above copyright
+*     notice, this list of conditions and the following disclaimer.
+*   * Redistributions in binary form must reproduce the above
+*     copyright notice, this list of conditions and the following
+*     disclaimer in the documentation and/or other materials provided
+*     with the distribution.
+*   * Neither the name of the TREX Project nor the names of its
+*     contributors may be used to endorse or promote products derived
+*     from this software without specific prior written permission.
+* 
+*  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+*  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+*  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+*  FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+*  COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+*  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+*  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+*  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+*  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+*  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+*  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+*  POSSIBILITY OF SUCH DAMAGE.
+*/
+
+// Declare enumeration for Token States
+enum TokenStates {INACTIVE, ACTIVE, MERGED, REJECTED}
+
+// Declare a marker class to indicate the base class should be a Timeline
+// which enforces a total order. This should only arise where we
+// have predicates!
+class Timeline {}
+
+/**
+ * The TICK DURATION in seconds. It will be set when the deliberative reactor is loaded
+ */
+float TICK_DURATION;
+
+/**
+ * This MISSION_END will be set when a deliberative reactor is loaded. It is mapped to the agent horizon
+ */
+int MISSION_END;
+
+/**
+ * The AGENT_CLOCK will capture clock tick events for propagation purposes
+ */
+int AGENT_CLOCK;
+
+enum Mode {
+  External, 	// Synchronize observations and dispatch plans as goals
+  Internal, 	// Publish updates at the current tick
+  Ignore	// Not synchronized at all (can be deprecated?)
+}
+
+class AgentTimeline extends Timeline {
+  Mode mode; // Indicate if an internal or external timeline
+  string defaultPredicate; // Sets the default predicate value for filling out an emty timeline and resettting
+  bool persistent; // Indicate if the current value can be discarded on a reset to recover
+
+  /**
+   * A predicate to reflect that the timeline is undefined. Used to fill gaps
+   * where they occur.
+   */
+  predicate undefined{};
+
+  /**
+   * A predicate which is used to block any successor states for a timeline
+   */
+  predicate Terminated{end == MISSION_END;}
+
+  AgentTimeline(Mode _mode){
+    mode = _mode;
+    defaultPredicate = "undefined";
+    persistent = true;
+  }
+
+  AgentTimeline(Mode _mode, string _defaultPredicate){
+    mode = _mode;
+    defaultPredicate = _defaultPredicate;
+    persistent = true;
+  }
+
+  AgentTimeline(Mode _mode, string _defaultPredicate, bool _persistent){
+    mode = _mode;
+    defaultPredicate = _defaultPredicate;
+    persistent = _persistent;
+  }
+};
+
+class StateVariable extends AgentTimeline{
+  predicate Holds{ duration == 1; }
+  StateVariable(Mode _mode){super(_mode);}
+  StateVariable(Mode _mode, string _defaultPredicate){super(_mode, _defaultPredicate);}
+};
+
+enum ResultStatus {
+  UNDEFINED,  // The action becomes inactive, but no meaningful result status applies.
+  SUCCESS,    // Indicates the behavior terminated, accomplsihing its goals. 
+  ABORTED,    // The action aborted pursuit of its goal of its own volition
+  PREEMPTED   // The behavioraction terminated on command from a client.
+};
+
+/**
+ * Encapsulate Actions that have a state of active or inactive
+ */
+class AgentAction extends AgentTimeline {
+
+  predicate Inactive{
+    ResultStatus status;
+  }
+
+  predicate Active{
+    int dispatch_time; // The time at which the goal was dispatched
+    int max_duration;  // If duration exceeds this, the token should be preempted.
+    dispatch_time <= start;
+    start < MISSION_END; 
+    trex_behavior(object); // Maintains connection between this token and its parent, if also a behavior. Use this to propagate max duration bounds.
+  }
+
+  AgentAction(Mode _mode){
+    super(_mode, "Inactive", false);
+  }
+};
+
+AgentAction::Active{
+  meets(Inactive _reserved_s);
+  // This is generic where behaviors are contained
+  max_duration <= end - start;
+}
+
+AgentAction::Inactive{
+  defaultOnCommit(status, UNDEFINED);
+}

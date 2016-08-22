@@ -1,0 +1,12 @@
+#include "GamePlay.nddl"
+
+
+
+CreatorTimeline ct = new CreatorTimeline(Ignore);
+ReciverTimeline rt = new ReciverTimeline(Mode.Internal);
+
+close();
+
+fact(rt.Alpha alpha);
+
+

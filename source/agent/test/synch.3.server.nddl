@@ -1,0 +1,20 @@
+#include "synch.nddl"
+
+// Will always abort
+ResetCircuitBreaker::Inactive{
+  if (start <= 6){
+    eq(status, ABORTED);
+  }
+  else{
+    eq(status, SUCCESS);
+  }
+}
+
+ResetCircuitBreaker::Active{
+  eq(duration, 1);
+}
+
+ResetCircuitBreaker rcb = new ResetCircuitBreaker(Internal);
+
+fact(rcb.Inactive);
+

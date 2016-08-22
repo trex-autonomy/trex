@@ -1,0 +1,745 @@
+#include "TREX.nddl"
+#include "dispatchlib.nddl"
+
+enum Values {Rock, Paper, Scissors};
+
+class PlayerState extends AgentTimeline {
+	predicate Hides{}
+	predicate Shows{Values value;}
+
+	PlayerState(Mode _mode){
+		super(_mode);
+	}
+}
+
+PlayerState::Hides{
+	meets(Shows);
+	met_by(Shows);
+}
+
+PlayerState::Shows{
+	meets(Hides);
+	met_by(Hides);
+}
+
+class Player extends AgentTimeline {
+	PlayerState hand;
+	predicate Wait{}
+	predicate One{duration = 1;}
+	predicate Two{duration = 1;}
+	predicate Three{duration = 1;}
+	predicate Draw{duration = 1;}
+	Player(Mode _playerMode, Mode _stateMode){
+		super(_playerMode);
+		hand = new PlayerState(_stateMode);
+	}
+}
+
+class Umpire extends AgentTimeline {
+	Player player1;
+	Player player2;
+
+	predicate PlayGame{duration = 4;}
+	predicate Wait{}
+
+	Umpire(Player _player1, Player _player2, Mode _mode){
+		super(_mode);
+		player1 = _player1;
+		player2 = _player2;
+	}
+}
+
+Player::Wait{
+	met_by(Draw);
+	meets(One);
+	contained_by(object.hand.Hides);
+}
+
+Player::One{
+	met_by(Wait);
+	meets(Two);
+	contained_by(object.hand.Hides);
+}
+
+Player::Two{
+	met_by(One);
+	meets(Three);
+	contained_by(object.hand.Hides);
+}
+
+Player::Three{
+	met_by(Two);
+	meets(Draw);
+	contained_by(object.hand.Hides);
+}
+
+Player::Draw{
+	met_by(Three);
+	meets(Wait);
+	contained_by(object.hand.Shows);
+}
+
+Umpire::PlayGame{
+	met_by(Wait);
+	meets(Wait);
+	ends(object.player1.Draw);
+	ends(object.player2.Draw);
+}
+
+Umpire::Wait{
+	met_by(PlayGame);
+	meets(PlayGame);
+	equals(object.player1.Wait);
+	equals(object.player2.Wait);
+}
+
+/**
+ * A single predicate with an integer interval parameter. Allows
+ * testing with reactive planning and allows for changes in binding
+ * parameters to cause dis-synchrony between reactors.
+ */
+class NumberTimeline extends AgentTimeline{
+	predicate holds{
+		int value = [0 4];
+		eq(duration,1);
+	}
+
+	NumberTimeline(Mode _mode){
+		super(_mode);
+	}
+}
+
+NumberTimeline::holds {
+	met_by(holds);
+	meets(holds);
+}
+
+class A_Timeline extends AgentTimeline {
+	predicate pred{}
+	A_Timeline(Mode _mode){super(_mode);	}
+}
+
+class B_Timeline extends AgentTimeline {
+	predicate pred1{}
+	predicate pred2{}
+	B_Timeline(Mode _mode){super(_mode);	}
+}
+
+/**
+ * This rule can never be satisfied since it is inconsistent in requiring pred1 for both subgoals on different timelines. Rules
+ * on B timeline sub-goal the opposite value to ensure this is the case.
+ */
+A_Timeline::pred{
+ starts_before(B_Timeline.pred1 a);
+ starts_before(B_Timeline.pred1 b);
+ neq(a.object, b.object);
+ concurrent(a.end, end);
+
+ // a equals b
+ concurrent(a.start, b.start);
+ concurrent(a.end, b.end);
+ eq(a.duration, b.duration);
+
+ eq(a.duration,4);
+}
+
+/**
+ * Set the predicates up so that they require the opposite predicate on another object. Assume 2 instances exactly for testing.
+ */
+B_Timeline::pred1{
+ equals(B_Timeline.pred2 p);
+ neq(object, p.object);
+}
+
+B_Timeline::pred2{
+ equals(B_Timeline.pred1 p);
+ neq(object, p.object);
+}
+
+/**
+ * Used to test the undefined semantics. Model will force a cycle with gaps. Agent should fill gaps
+ * with undefined
+ */
+class CyclicTimeline extends AgentTimeline{
+
+	predicate pred{}
+
+	CyclicTimeline(Mode _mode){
+		super(_mode);
+	}
+}
+
+CyclicTimeline::pred {
+	eq(duration, 1);
+	any(pred t0);
+	temporalDistance(t0.end, 1, start); // Force a gap with predecessor
+
+	any(pred t1);
+	temporalDistance(end, 1, t1.start); // Force a gap with successor
+}
+
+/**
+ * Want to test that internal  timelines derived from exetrnal timelines do not trip into the undefined state
+ * but rather are synchronized correctly.
+ */
+class SensorTimeline  extends AgentTimeline {
+	predicate holds{int value;}
+
+	SensorTimeline(Mode _mode){
+		super(_mode);
+	}
+}
+
+class DerivedTimeline  extends AgentTimeline {
+	predicate holds{int value;}
+
+	DerivedTimeline(Mode _mode){
+		super(_mode);
+	}
+}
+
+SensorTimeline::holds{
+ equals(DerivedTimeline.holds t);
+
+ // Simple functional relationship
+ addEq(value, 1, t.value);
+
+ // The duration is always a single tick
+ eq(duration, 1);
+}
+
+class Counter extends AgentTimeline {
+	predicate Holds{int value;}
+
+	Counter(Mode _mode){super(_mode, "undefined");}
+}
+
+Counter::Holds{
+	meets(Holds);
+}
+
+// Actions
+class IncrementAction extends AgentAction{
+  IncrementAction(){super(Internal);}
+};
+
+class MultiplyAction extends AgentAction{
+  predicate Active{int multiplier;}
+  MultiplyAction(){super(Internal);}
+};
+
+class IteratorAction extends AgentAction{
+  predicate Active{int counter;}
+  IteratorAction(){super(Internal);}
+};
+
+class GraspAction extends AgentAction{
+  predicate Active{
+	  int x;
+	  int y;
+	  duration == 1;
+  }
+  GraspAction(){super(Internal);}
+};
+
+class TestActions{
+  IncrementAction incrementer;
+  MultiplyAction multiplier;
+  IteratorAction iterator;
+  GraspAction grasper;
+
+  TestActions(){
+    incrementer = new IncrementAction();
+    multiplier = new MultiplyAction();
+    iterator = new IteratorAction();
+    grasper = new GraspAction();
+  }
+};
+
+class ValueTimeline extends AgentTimeline{
+	predicate Holds{int value;}
+
+	ValueTimeline(Mode _mode){super(_mode, "undefined");}
+};
+
+IncrementAction::Active{
+  // at start: v
+  any(Counter.Holds v1);
+  v1.start <= start;
+  v1.end >= start;
+
+  // at end: v++
+  any (Counter.Holds v2);
+  v2.start < end;
+  v2.end >= end;
+  v1.value + 1 == v2.value;
+  duration == [1 2];
+
+  v1.end == v2.start;
+}
+
+MultiplyAction::Active{
+	eq(duration, 1);
+	contained_by(ValueTimeline.Holds v1);
+	concurrent(v1.end, end);
+	// v1 meets v2
+	any(ValueTimeline.Holds v2);
+	concurrent(v1.end, v2.start);
+
+	mulEq(v1.value, multiplier, v2.value);
+}
+
+/**
+ * This action is designed to test the master / slave relationship between actions
+ * and to ensure that the action is considered in scope even if the master is in the past. 
+ * It is a bit convoluted to construct an action that will subgoal only when its end time is at the current tick.
+ * @see action.4
+ */
+IteratorAction::Active{
+  starts(Counter.Holds c);
+  duration == 1;
+  c.value == counter;
+  if (isSingleton(end)){
+    if (counter > 0){
+      before(Active i);
+      i.counter + 1 == counter;
+    }
+  }
+}
+
+ValueTimeline::Holds{
+  if(value == 100){
+    starts(IncrementAction.Active action);
+  }
+
+  if(value == 1000){
+    contains(MultiplyAction.Active action);
+    eq(action.multiplier, 10);
+  }
+
+  // Use the magic number of 1111 to indicate an inconsistency
+  /* BUG IN INTERPRETER
+     if(value == 1111){
+     eq(1, 0); // Will alwyas fail of course.
+     }
+  */
+  neq(value, 1111);
+}
+
+/**
+ * Test constraints
+ */
+ValueTimeline::Holds{
+  int a, b, c, d;
+  eq(a, 1);
+  eq(b, [-10, 10]);
+  eq(c, [-10, 9]);
+  eq(d, [-9, 10]);
+
+  absMaxOnCommit(a);
+  absMaxOnCommit(b);
+  absMaxOnCommit(c);
+  absMaxOnCommit(d);
+
+  /*
+  if(isSingleton(end)){
+    eq(a, 1);
+    eq(b, 10);
+    eq(c, -10);
+    eq(d, 10);
+  }
+  */
+}
+
+class Valve extends AgentTimeline {
+	predicate Open{}
+	predicate Closed{}
+	Valve(Mode _mode){super(_mode, "Closed");}
+	Valve(Mode _mode, bool _persistent){super(_mode, "Closed", _persistent);}
+}
+
+Valve::Open{
+	meets(Closed);
+	met_by(Closed);
+}
+
+Valve::Closed{
+	meets(Open);
+	met_by(Open);
+}
+
+class ValveController extends AgentTimeline {
+	predicate Inactive{}
+	predicate InconsistentSlavesInExecution{}
+	predicate ValveStaysClosed{}
+	ValveController(Mode _mode){super(_mode, "Inactive");}
+}
+
+ValveController::InconsistentSlavesInExecution{
+	addEq(start, duration, end);
+	contained_by(Valve.Open);
+
+	// Force delayed inconsistency
+	bool readyToClose;
+	testLEQ(readyToClose, 5, duration);
+	if(readyToClose == true){
+		contained_by(Valve.Closed);
+	}
+}
+
+ValveController::ValveStaysClosed{
+	contained_by(Valve.Closed);
+}
+
+/**
+ * Model support to test that synchronization does not apply conditions which
+ * restrict timelines temporal bounds.
+ */
+class MotionSimulator extends AgentTimeline {
+	predicate Holds{
+		int value;
+		defaultOnCommit(duration, 1);
+		defaultOnCommit(value, 0);
+	}
+
+	MotionSimulator(Mode _mode){super(_mode, "Holds");}
+}
+
+class HorizontalControl extends AgentTimeline {
+	predicate Holds{
+		int value;
+		defaultOnCommit(value, 0);
+	}
+
+	HorizontalControl(Mode _mode){super(_mode, "Holds");}
+}
+
+/**
+ * This rule is the key for synchronization tests. See synch.*. Points to note:
+ * 1. Only bind the duration after commit so that we postpone processing
+ *    slaves until tick 1 where both slaves can be reviewed
+ * 2. If tao = 1, there are 3 slaves. The first is contained_by and the second and third are equals. If we resolve the contained-by
+ *    slave first, it can be merged. This would prohibit the resolution of the equals constraint. The synchroniztion
+ *    algorithm must defer non-unit decisions till all unit decisions are made. This lookahead is to render backtracking
+ *    unnecessary. Note that it forces a transition of the valve to be open for exactly one second.
+ * 3. If a value is 1, it will require a spanning token [tao, tao+1]. Force a transition of HC to 1.
+ * 4. If a value is 2, it will require a token that contains {tao}. For a transition of HC to 2.
+ * 5. If a value is 3, it will require a token that contains {tao+1}. Force a transition of HC to 3.
+ */ 
+MotionSimulator::Holds{
+	// Should ensure that at tick 1 we transition both the hc timeline and the
+	// valve timeline. If the more loosely constrained slave were merged then we could not
+	// resolve the more tightly constrained one, even though both are feasible. By requiring an equals constraint
+	// we will ensure HC will transition again on the next tick
+	if(start == 1){
+		contained_by(HorizontalControl.Holds);
+		equals(Valve.Open);
+		equals(HorizontalControl.Holds);
+	}
+
+	// This verifies we are including spanning tokens (contain tao, tao+1) by forcing a transition to 1
+	if(value == 1){
+		contained_by(HorizontalControl.Holds hc);
+		eq(hc.value, 1);
+	}
+
+	// This verifies that we are including tokens that contain tao by forcing a transition to a 2.
+	if(value == 2){
+		any(HorizontalControl.Holds hc);
+		eq(hc.value, 2);
+		precedes(hc.start, start);
+		precedes(start, hc.end);
+	}
+
+	//  This verifies that we are including tokens that contain (tao + 1)
+	if(value == 3){
+		any(HorizontalControl.Holds hc);
+		eq(hc.value, 3);
+		precedes(hc.start, end);
+		precedes(end, hc.end);
+	}
+
+}
+
+/**
+ * Model used for scalability testing
+ */
+class ScalabilityTestTimeline extends AgentTimeline {
+	int n;
+	int d; // frequency = 1/d
+	int maxD; // maxD >= d
+	int c; // connections to other timelines
+	predicate Holds{}
+
+	ScalabilityTestTimeline(int _n, int _d, int _maxD, int _c, Mode _mode){
+		super(_mode, "Holds");
+		n = _n;
+		d = _d;
+		maxD = _maxD;
+		c = _c;
+	}
+
+
+	ScalabilityTestTimeline(int _n, int _d, int _c, Mode _mode){
+		super(_mode, "Holds");
+		n = _n;
+		d = _d;
+		maxD = _d;
+		c = _c;
+	}
+}
+
+ScalabilityTestTimeline::Holds{
+	// Default value based on object parameter
+	defaultOnCommit(duration, object.d);
+	leq(duration, object.maxD);
+
+	// Predecessor has same duration as this token
+	met_by(Holds p);
+	meets(Holds s);
+
+	// If the duration is a singleton, it must be 1. Force this in a manner that introduces a backtrack
+	if(isSingleton(duration)){
+		eq(duration, object.d);
+	}
+
+	if(object.mode == Internal){
+		bool hasNeighbors;
+		testLT(hasNeighbors, 0, object.c);
+
+		if(hasNeighbors == true){
+			// If internal, it will be starting concurrently with all timelines
+			ScalabilityTestTimeline allTimelines;
+
+			// This constraint restricts the set of timeline that we iterate over by filterng the
+			// numbers in the nighborhood of the current object.
+			neighborhood(object.n, object.c, allTimelines.n);
+			if(isSingleton(object)){
+
+				foreach(o in allTimelines){
+					starts(o.Holds);
+				}
+			}
+		}
+	}
+}
+
+
+/////////////////////////////////////////////////////
+/// Orienteering
+/////////////////////////////////////////////////////
+
+typedef int [0 5] PRIORITY; /* Used to assign a priority to goals */
+typedef int [0 500] OrienteerID; /* Note: 499 is rejected no matter what. */
+typedef float [0.0 +inff] PFLOAT;
+
+class OrienteeringTimeline extends AgentTimeline {
+  predicate Inactive{
+    PFLOAT x;
+    PFLOAT y;
+  }
+  predicate Active {
+    PFLOAT x;
+    PFLOAT y;
+    PRIORITY priority; // 0 is highest priority
+    int fakeDuration;
+    OrienteerID value;
+    Counter countertimeline;
+  }
+
+  OrienteeringTimeline(Mode _mode){
+    super(_mode);
+  }
+};
+
+
+OrienteeringTimeline::Inactive {
+  met_by(Active);
+  meets(Active);
+  if (object.mode == Internal) {
+     bool shouldEnd;
+     testLEQ(shouldEnd, end, MISSION_END);
+     if (shouldEnd == true) {
+     	eq(duration, 4);
+     }
+  }
+}
+OrienteeringTimeline::Active {
+  met_by(Inactive);
+  meets(Inactive next);
+  contained_by(countertimeline.Holds hp);
+  eq(hp.value, value);
+  neq(value, 499);
+  if (object.mode == Internal) {
+     eq(duration, fakeDuration);
+  }
+  eq(next.x, x);
+  eq(next.y, y);
+}
+
+
+/**
+ * Test classes to reproduce constraint migration bug when a constraint is guarded
+ */
+class GraspObject extends AgentTimeline {
+  int param;
+
+  predicate Inactive{}
+
+  predicate Active{
+    int x;
+    int y;
+  }
+
+  GraspObject(Mode _mode){
+    super(_mode, "Inactive");
+    param = 0;
+  }
+};
+
+GraspObject::Inactive{
+  met_by(Active);
+  meets(Active);
+}
+
+GraspObject::Active{
+  met_by(Inactive);
+  meets(Inactive);
+
+  contains(GraspAction.Active a);
+  eq(a.x, x);
+  eq(a.y, y);
+}
+
+class Position extends AgentTimeline {
+  predicate Holds{
+    int x;
+    int y;
+    eq(duration, 1);
+    defaultOnCommit(x, 0);
+    defaultOnCommit(y, 0);
+  }
+
+  Position(Mode _mode){super(_mode, "Holds");}
+};
+
+
+GraspAction::Active{
+  contained_by(GraspObject.Active g);
+  eq(x, g.x);
+  eq(y, g.y);
+
+  met_by(Position.Holds p);
+  bool shouldEnd;
+  testEQ(shouldEnd, x, p.x);
+
+  // Force iteration
+  if(shouldEnd == false){
+    before(Active s);
+    eq(s.x, x);
+    eq(s.y, y);
+    precedes(s.end, g.end);
+  }
+
+  if(shouldEnd == true){
+    // Tests case of migration on a merged token with a proxy variable for a constraint
+    eq(g.object.param, 0);
+
+    // Further test to ensure that migration occurs correctly on a guard
+    if(g.object.param == 0){
+      concurrent(g.end, end);
+    }
+  }
+}
+
+/**
+ * Model Components to Test the persistence model. For this we require scenarios where
+ * an internal timeline value is always inconsistent at the end, and we want to ensure
+ * that we can reject the value in question and revert to the default value. We also
+ * want to ensure that persistent objects are respected.
+ */
+class PersistenceTest_Container extends AgentTimeline {
+  predicate Inactive{}
+  predicate Active {
+    leq(duration, 3);
+  }
+
+  predicate On{}
+  predicate Off{}
+
+  /**
+   * Never persistent
+   */
+  PersistenceTest_Container(Mode _mode, string _defaultPredicate){
+    super(_mode, _defaultPredicate, false);
+  }
+}
+
+  PersistenceTest_Container::Active{
+    meets(Inactive);
+    met_by(Inactive);
+
+    // Set all valves open
+    Valve valves;
+    foreach (v in valves){
+      equals(v.Open);
+    }
+
+    // Always inconsistent. Should force a partial reset
+    if(isSingleton(end)){
+      eq(1, 0);
+    }
+  }
+
+  PersistenceTest_Container::Inactive{
+    meets(Active);
+    met_by(Active);
+  }
+
+/**
+ * The following rules apply only when the timeline is external. The idea is to force
+ * a conflict on observations from the model. Recall model should retain the original.
+ * and get rid of the current value.
+ */
+PersistenceTest_Container::On{
+  if(object.mode == External){
+    meets(Off);
+  }
+}
+PersistenceTest_Container::Off{
+  if(object.mode == External){
+    meets(On);
+  }
+}
+
+class LogTesting extends AgentTimeline{
+  predicate Holds {
+    bool p_bool;
+    int p_int;
+    float p_float;
+    string p_string;
+    Values p_symbol;
+  }
+
+  LogTesting(Mode m){ super(m, "Holds"); }
+};
+
+class MultByTimeline extends AgentTimeline {
+  MultByTimeline(Mode m){ super(m, "Holds"); }
+  predicate Inactive {
+      float nstate;
+      bool active;
+  }
+  predicate Active {
+      float nstate;
+      bool active;
+  }
+};
+MultByTimeline::Active{
+  meets(Inactive);
+  met_by(Inactive);
+}
+MultByTimeline::Inactive{
+  meets(Active);
+  met_by(Active);
+}

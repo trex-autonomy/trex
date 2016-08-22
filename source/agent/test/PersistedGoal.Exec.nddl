@@ -1,0 +1,25 @@
+/**
+ * Holds 3 internal timelines which are initialized to a consistent initial state. However,
+ * the initial state will generate sub-goals in the future which can never be planned. We want to show
+ * that the agent will continue to try to develop a plan and that it cannot delete the initial facts
+ * in the internal timelines. This will be the case until it declares values that have bound end times which become
+ * in the past. Then the value will become undefined.
+ */
+
+#include "GamePlay.nddl"
+
+A_Timeline a = new A_Timeline(Mode.Internal);
+B_Timeline b1 = new B_Timeline(Mode.Internal);
+B_Timeline b2 = new B_Timeline(Mode.Internal);
+
+close();
+
+// Fact: at start, a == pred
+fact(a.pred f0);
+precedes(f0.end, 10); // Forces sub-goals to be planned
+
+// Fact: at start, b1 == pred1
+fact(b1.pred1 f1);
+
+// Fact: at start, b2 == pred2
+fact(b2.pred2 f2);

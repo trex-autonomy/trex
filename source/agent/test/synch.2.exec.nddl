@@ -1,0 +1,13 @@
+#include "GamePlay.nddl"
+
+MotionSimulator ms = new MotionSimulator(Internal);
+HorizontalControl hc = new HorizontalControl(Internal);
+Valve v = new Valve(Internal);
+
+close();
+ 
+// Value of 3 will require a horizontal control value of 3, with start <= parent.end and end >= parent.end 
+// Expect to see a new motion simulator value at every tick. Expect that at tick 3 we will 
+rejectable(ms.Holds g);
+g.start = 3;
+g.value = 2;

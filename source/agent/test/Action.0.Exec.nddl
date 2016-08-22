@@ -1,0 +1,24 @@
+/**
+ * Expect actions to change values of counter. Under this formulation we expect the counter
+ * is controllable since it is internal
+ */
+
+#include "GamePlay.nddl"
+
+TestActions actions = new TestActions();
+Counter counter = new Counter(Mode.Internal);
+
+close();
+
+fact(counter.Holds f);
+f.value = 0;
+
+rejectable(IncrementAction.Active a);
+rejectable(IncrementAction.Active b);
+rejectable(IncrementAction.Active c);
+rejectable(IncrementAction.Active d);
+rejectable(IncrementAction.Active e);
+a before b;
+b before c;
+c before d;
+d before e;

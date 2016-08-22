@@ -1,0 +1,32 @@
+SubDir TREX agent base ;
+
+if ! $(TREX_READY) {
+
+ ModuleBase TREX :
+ 	Functions.cc
+ 	TestMonitor.cc
+	Assembly.cc
+	Synchronizer.cc
+	AgentClock.cc
+	DbSolver.cc 
+	DbCore.cc 
+	Agent.cc 
+	TeleoReactor.cc 
+        ObserverReactor.cc
+	Observer.cc 
+	Adapter.cc
+	Utilities.cc
+	ErrnoExcept.cc
+	RStat.cc
+        EuropaXML.cc
+        LogManager.cc
+        TickLogger.cc
+        ObservationLogger.cc
+        SimAdapter.cc
+        Thread.cc
+        MutexWrapper.cc
+        TextLog.cc
+	DbWriter.cc
+	;
+ ModuleMain trex-find : TrexFind.cc : TREX : trex-find ;
+}

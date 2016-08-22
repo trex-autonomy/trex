@@ -1,0 +1,8 @@
+1251134926541	Behavior.Active	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex/TREX/agent/base/TREX.nddl,122
+1251134926541	Behavior.Inactive	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex/TREX/agent/base/TREX.nddl,128
+1251134926541	Navigator.Inactive	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/navigator/exports.nddl,42
+1251134926541	Navigator.Active	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/navigator/navigator.nddl,33
+1251134926541	ROSAction.Active	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_ros/nddl/ros.nddl,61
+1251134926541	MoveBehavior.Inactive	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/common/move_behavior.nddl,43
+1251134926541	MoveBehavior.Inactive	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/navigator/navigator.nddl,119
+1251134926541	NavController.Holds	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/navigator/navigator.nddl,44

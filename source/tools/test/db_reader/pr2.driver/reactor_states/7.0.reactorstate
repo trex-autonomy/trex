@@ -1,0 +1,24 @@
+1276	driver	I
+	5097	MoveBehavior.Inactive	0	0	7	2.68435e+08
+1067	arms_tucked	E
+	4715	ArmsTucked.False	0	0	7	2.68435e+08
+1090	tilt_laser_ready	E
+	4757	TiltLaserReady.False	0	0	7	2.68435e+08
+1113	gripper_free	E
+	4799	GripperFree.True	0	0	7	2.68435e+08
+1133	laser_tilt_mechanism	E
+	4952	TiltLaserMechanism.uncontrolled	0	0	7	2.68435e+08
+1151	right_arm_mechanism	E
+	4994	RightArmMechanism.uncontrolled	0	0	7	2.68435e+08
+1169	right_gripper_mechanism	E
+	5036	RightGripperMechanism.uncontrolled	0	0	7	2.68435e+08
+1190	safety_tuck_arms	E
+	3368	SafetyTuckArms.Inactive	0	0	7	2.68435e+08
+1213	set_laser_tilt	E
+	4369	SetLaserTilt.Inactive	0	0	7	2.68435e+08
+1236	release_handle	E
+	4115	ReleaseHandle.Inactive	0	0	7	2.68435e+08
+1256	head_mechanism	E
+	4910	HeadMechanism.uncontrolled	0	0	7	2.68435e+08
+1299	move_base	E
+	3500	MoveBase.Inactive	0	0	7	2.68435e+08

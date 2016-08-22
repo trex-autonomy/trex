@@ -1,0 +1,11 @@
+
+
+#include "GamePlay.nddl"
+
+
+MultByTimeline mult = new MultByTimeline(Mode.External);
+
+close();
+
+rejectable(mult.Active g);
+g.nstate = 42;

@@ -1,0 +1,14 @@
+1251134926564	Behavior.Active	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex/TREX/agent/base/TREX.nddl,122
+1251134926564	Behavior.Inactive	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex/TREX/agent/base/TREX.nddl,128
+1251134926564	ROSAction.Active	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_ros/nddl/ros.nddl,61
+1251134926564	MoveBehavior.Inactive	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/common/move_behavior.nddl,43
+1251134926564	MoveBehavior.Active	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/driver/driver.nddl,7
+1251134926564	MoveBase.Inactive	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/driver/driver.nddl,14
+1251134926564	MoveBase.Active	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/common/nav.nddl,12
+1251134926564	ArmsTucked.True	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/state_estimator/exports.nddl,29
+1251134926564	SafetyTuckArms.Active	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/state_estimator/exports.nddl,46
+1251134926564	TiltLaserReady.True	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/state_estimator/exports.nddl,35
+1251134926564	SetLaserTilt.Active	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/state_estimator/exports.nddl,52
+1251134926564	GripperFree.True	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/state_estimator/exports.nddl,40
+1251134926564	ReleaseHandle.Active	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/state_estimator/exports.nddl,56
+1251134926564	NavigationBehavior.Active	/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/common/nav.nddl,20

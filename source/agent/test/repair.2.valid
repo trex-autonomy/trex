@@ -1,0 +1,7 @@
+0 NOTIFY  valve Valve.Closed
+0 NOTIFY  vc ValveController.Inactive
+1 REQUEST valve Valve.Open
+2 NOTIFY  valve Valve.Open
+2 NOTIFY  vc ValveController.InconsistentSlavesInExecution
+6 RECALL valve Valve.Open
+6 NOTIFY  vc ValveController.Inactive

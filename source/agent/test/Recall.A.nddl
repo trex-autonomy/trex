@@ -1,0 +1,32 @@
+/**
+ * Holds 3 timelines, but owns one. Will plan for all, dispatching requests for b and c. C will be
+ * set independently and force a recall of requests to both b and c. 
+ */
+
+#include "GamePlay.nddl"
+
+NumberTimeline a = new NumberTimeline(Mode.Internal);
+NumberTimeline b = new NumberTimeline(Mode.External);
+NumberTimeline c = new NumberTimeline(Mode.External);
+
+close();
+
+// Fact: at start, a == holds(0)
+fact(a.holds f);
+f.value = 0;
+
+// Goal: at 1, c = holds(1); Should be consistent
+rejectable(c.holds g0);
+g0.start = 1;
+g0.value=1;
+
+// Goal: at 3, a == holds(1);
+rejectable(a.holds g1);
+g1.start = 3;
+g1.value=1;
+
+// Force planning over c and b.
+rejectable(b.holds g2);
+g2.start = 3;
+rejectable(c.holds g3);
+g3.start = 3;

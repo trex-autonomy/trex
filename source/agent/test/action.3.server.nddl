@@ -1,0 +1,8 @@
+#include "GamePlay.nddl"
+
+Counter counter = new Counter(Mode.Internal);
+
+close();
+
+fact(counter.Holds f);
+f.value = 0;

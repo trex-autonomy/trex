@@ -1,0 +1,6 @@
+0 NOTIFY  slave_action SlaveAction.Active
+0 NOTIFY  master_action MasterAction.Inactive
+2 NOTIFY  master_action MasterAction.Active
+3 REQUEST slave_action SlaveAction.Inactive
+4 RECALL slave_action SlaveAction.Inactive
+4 NOTIFY  master_action MasterAction.Inactive

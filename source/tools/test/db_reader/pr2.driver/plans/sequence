@@ -1,0 +1,368 @@
+/wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/logs/2009.236.5/pr2.driver/plans1251134926564--begin /wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex/TREX/agent/base/TREX.nddl
+
+// Declare enumeration for Token States
+enum TokenStates {INACTIVE, ACTIVE, MERGED, REJECTED}
+
+
+// Declare built in constraints used for common TREX use cases
+constraint default(var, value) { var <: value }
+constraint defaultOnCommit(var, value) { var <: value }
+constraint assertCompleted(s) { s <: TokenStates }
+constraint assertRejected(s) { s <: TokenStates }
+
+
+// Declare a marker class to indicate the base class should be a Timeline
+// which enforces a total order. This should only arise where we
+// have predicates!
+class Timeline {}
+
+/**
+ * The TICK DURATION in seconds. It will be set when the deliberative reactor is loaded
+ */
+float TICK_DURATION;
+
+/**
+ * This MISSION_END will be set when a deliberative reactor is loaded. It is mapped to the agent horizon
+ */
+int MISSION_END;
+
+/**
+ * The AGENT_CLOCK will capture clock tick events for propagation purposes
+ */
+int AGENT_CLOCK;
+
+enum Mode {
+  External, 	// Synchronize observations and dispatch plans as goals
+  Internal, 	// Publish updates at the current tick
+  Ignore	// Not synchronized at all (can be deprecated?)
+}
+
+class AgentTimeline extends Timeline {
+  Mode mode; // Indicate if an internal or external timeline
+  string defaultPredicate; // Sets the default predicate value for filling out an emty timeline and resettting
+  bool persistent; // Indicate if the current value can be discarded on a reset to recover
+
+  /**
+   * A predicate to reflect that the timeline is undefined. Used to fill gaps
+   * where they occur.
+   */
+  predicate undefined{};
+
+  /**
+   * A predicate which is used to block any successor states for a timeline
+   */
+  predicate Terminated{concurrent(end, MISSION_END);}
+
+  AgentTimeline(Mode _mode){
+    mode = _mode;
+    defaultPredicate = "undefined";
+    persistent = true;
+  }
+
+  AgentTimeline(Mode _mode, string _defaultPredicate){
+    mode = _mode;
+    defaultPredicate = _defaultPredicate;
+    persistent = true;
+  }
+
+  AgentTimeline(Mode _mode, string _defaultPredicate, bool _persistent){
+    mode = _mode;
+    defaultPredicate = _defaultPredicate;
+    persistent = _persistent;
+  }
+};
+
+/**
+ * Base class for actions. These will never be exchanged across reactors and are generated to
+ * accomplisg goals. This is a construct of a deliberative reactor
+ */
+class AgentActions {
+  /**
+   * This action supports a common idiom to indicate we want something to happen proactively.
+   */
+  predicate startEvent{ eq(duration, 1); }
+
+  AgentActions(){}
+};
+
+class StateVariable extends AgentTimeline{
+ 	predicate Holds{ eq(duration, 1); }
+ 	StateVariable(Mode _mode){super(_mode);}
+	StateVariable(Mode _mode, string _defaultPredicate){super(_mode, _defaultPredicate);}
+};
+
+enum ResultStatus {
+  UNDEFINED,  // Used when the behavior becomes inactive in an undefined state, such as when rebooting
+  SUCCESS,    // Indicates the behavior terminated, accomplsihing its goals. Or so it believes!
+  ABORTED,    // Means the behavior aborted pursuit of its goal of its own volition
+  PREEMPTED   // Means the behavior terminated on command from a client.
+};
+
+/**
+ * Encapsulate Behaviors that have a state of active or inactive
+ */
+class Behavior extends AgentTimeline {
+
+  predicate Inactive{
+    ResultStatus status;
+  }
+
+  predicate Active{
+    int dispatch_time; // The time at which the goal was dispatched
+    int max_duration; // If duration exceeds this, the token should be preempted.
+    precedes(dispatch_time, start); // This is a <= constraint, but we use explicit temporal construct instead.
+    temporalDistance(start, [1, +inf], MISSION_END); // Behaviors must start before the mission ends
+    trex_behavior(object); // Maintains connection between this token and its parent, if also a behavior. Use this to propagate max duration bounds.
+  }
+
+  Behavior(Mode _mode){
+    super(_mode, "Inactive", false);
+  }
+};
+
+Behavior::Active{
+  meets(Inactive _reserved_s);
+  // This is generic where behaviors are contained
+  max_duration <= end - start;
+}
+
+Behavior::Inactive{
+  defaultOnCommit(status, UNDEFINED);
+}
+--begin /wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/common/move_behavior.nddl
+#include "TREX.nddl"
+#include "world_model/topological_map.nddl"
+
+/**
+ * The MoveBehavior is an abstract class that handles navigation towards a goal. A mode paramter
+ * will be used to indicate the type of concrete class to use.
+ */
+class MoveBehavior extends Behavior {
+  predicate Inactive{
+    string frame_id;
+    float time_stamp;
+    float x;
+    float y;
+    float z;
+    float qx;
+    float qy;
+    float qz;
+    float qw;
+  }
+
+  // Parameters to get to the target
+  predicate Active {
+    string frame_id;
+    float time_stamp;
+    float x;
+    float y;
+    float z;
+    float qx;
+    float qy;
+    float qz;
+    float qw;
+    MAP_KEY start_connector;
+  }
+
+  MoveBehavior(Mode _mode){
+    super(_mode);
+  }
+};
+
+/**
+ * If the move is successful, bind parameters based on the active pose pursued.
+ */
+MoveBehavior::Inactive{
+  if(status == SUCCESS){
+    met_by(Active p);
+    eq_pose_msg(object, p.object);
+  }
+}
+
+--begin /wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/common/nav.nddl
+// Tier 1 interface points - external api
+#include "rcs/nav/exports.nddl"
+#include "common/move_behavior.nddl"
+
+// Tier 2 interface points - other domains
+#include "state_estimator/exports.nddl"
+
+// Mechanisms used for driving and tucking arms
+HeadMechanism head_mechanism = new HeadMechanism(External);
+
+// Controller and laser configuration requirements
+MoveBase::Active{
+  contained_by(head_mechanism.use_head_controller);
+  contained_by(laser_tilt_mechanism.use_laser_tilt_controller);
+}
+
+/**
+ * Must be in a valid configuration for navigation
+ */
+NavigationBehavior::Active{
+  contained_by(arms_tucked.True);
+  contained_by(tilt_laser_ready.True);
+}
+--begin /wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/driver/driver.nddl
+#include "common/nav.nddl"
+#include "common/move_behavior.nddl"
+
+MoveBehavior driver = new MoveBehavior(Internal);
+MoveBase move_base = new MoveBase(External);
+
+MoveBehavior::Active{
+  ends(move_base.Active cmd);
+  contains cmd;
+  cmd.max_duration <= max_duration;
+  eq_pose_msg(cmd.object, this.object);
+}
+
+MoveBase::Inactive{
+  starts_during(driver.Inactive d);
+  eq(d.status, status);
+}
+--begin /wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/state_estimator/exports.nddl
+#include "mechanism_control/exports.nddl"
+#include "rcs/nav/exports.nddl"
+#include "rcs/plugs/exports.nddl"
+#include "rcs/doors/exports.nddl"
+#include "rcs/state_estimator/exports.nddl"
+
+float SAFETY_TUCK_ARMS_DURATION_BOUND = 600.0;
+float RELEASE_HANDLE_DURATION_BOUND = 300.0;
+
+// Safety State Variables Timelines
+ArmsTucked arms_tucked = new ArmsTucked(External);
+TiltLaserReady tilt_laser_ready = new TiltLaserReady(External);
+GripperFree gripper_free = new GripperFree(External);
+
+// Mechamisms of interest
+TiltLaserMechanism laser_tilt_mechanism = new TiltLaserMechanism(External);
+RightArmMechanism right_arm_mechanism = new RightArmMechanism(External);
+RightGripperMechanism right_gripper_mechanism = new RightGripperMechanism(External);
+
+// Action timeline to plan for
+SafetyTuckArms safety_tuck_arms = new SafetyTuckArms(External);
+
+// Action causing tilt laser to be set
+SetLaserTilt set_laser_tilt = new SetLaserTilt(External);
+
+// Action causing gripper to free
+ReleaseHandle release_handle = new ReleaseHandle(External);
+
+ArmsTucked::True{
+  met_by(safety_tuck_arms.Active p);
+  isSucceded(p.object) == true;
+  p.max_duration <= SAFETY_TUCK_ARMS_DURATION_BOUND;
+}
+
+TiltLaserReady::True{
+  met_by(set_laser_tilt.Active p);
+  isSucceded(p.object) == true;
+}
+
+GripperFree::True{
+  met_by(release_handle.Active p);
+  isSucceded(p.object) == true;
+  p.max_duration <= RELEASE_HANDLE_DURATION_BOUND;
+}
+
+SafetyTuckArms::Active{
+  contained_by(right_arm_mechanism.use_joint_trajectory_controller);
+  contained_by(right_gripper_mechanism.use_effort_controller);
+  contained_by(gripper_free.True);
+}
+
+SetLaserTilt::Active{
+  contained_by(laser_tilt_mechanism.use_laser_tilt_controller);
+}
+
+ReleaseHandle::Active{
+  contained_by(right_arm_mechanism.use_constraint_composite_cartesian_trajectory_controller);
+  contained_by(right_gripper_mechanism.use_effort_controller);
+}
+--begin /wg/stor5/jbohren/ros/ros-pkg-branch-trex/trex_ros/nddl/ros.nddl
+#include "TREX.nddl"
+
+/**
+ * An error bound for time when preempting or when terminating.
+ */
+typedef int [-1, 1] TIME_ERROR_BOUND;
+
+/**
+ * Defines core interfaces for ROS integration
+ */
+
+/**
+ * Specialize to mark all ROS State Variables. Note that it can be internal or external, since we may choose
+ * to simulate it with NDDL.
+ */
+class ROSStateVariable extends AgentTimeline {
+
+  predicate Holds{}
+
+  ROSStateVariable(Mode _mode){ super(_mode, "Holds"); }
+  ROSStateVariable(Mode _mode, string _default_value, bool _persistent){ super(_mode, _default_value, _persistent); }
+
+  ROSStateVariable(Mode _mode, string _pred){
+    super(_mode, _pred);
+  }
+
+  ROSStateVariable(Mode _mode, string _pred, bool _opt){
+    super(_mode, _pred, _opt);
+  }
+};
+
+/**
+ * A StateMachine control structure
+ */
+class StateMachine extends AgentTimeline {
+
+  // The controller is in an inactive state. Basically idle.
+  predicate Inactive{
+    ResultStatus status;
+    // Be default will be UNDEFINED
+    defaultOnCommit(status, UNDEFINED);
+    // Should always be integrated in the mission profile
+    temporalDistance(start, [1, +inf], MISSION_END);
+  }
+  
+  StateMachine(){ super(Internal, "Inactive"); }
+  StateMachine(Mode _mode, string _default_value, bool _persistent){ super(Internal, "Inactive", _persistent); }
+};
+
+/**
+ * Specialize to mark all ROS Actions. A max_duration parameter is used
+ * to allow actions to be preempted in the ros adapter.
+ */
+class ROSAction extends Behavior {
+
+  ROSAction(Mode _mode){
+    super(_mode);
+  }
+};
+
+ROSAction::Active{
+  int time_since_dispatch;
+  dispatch_time + time_since_dispatch == start;
+  time_since_dispatch <= 100; // Magic number to break the plan if 100 ticks passes between dispatch and starting
+}
+
+/**
+ * Reusable class for boolean state variables
+ */
+class BooleanTimeline extends AgentTimeline {
+  predicate True{}
+  predicate False{};
+
+  /**
+   * Persistent by default
+   */
+  BooleanTimeline(Mode _mode, string _default_value){
+    super(_mode, _default_value, true);
+  }
+  BooleanTimeline(Mode _mode, string _default_value, bool _persistent){
+    super(_mode, _default_value, _persistent);
+  }
+};
+

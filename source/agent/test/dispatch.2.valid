@@ -1,0 +1,2 @@
+0 NOTIFY  foo SimpleTestForDispatchTime.p
+2 REQUEST foo SimpleTestForDispatchTime.p

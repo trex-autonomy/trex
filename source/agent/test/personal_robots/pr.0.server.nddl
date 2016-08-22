@@ -1,0 +1,26 @@
+#include "personal_robots/model.nddl"
+
+
+Doorman::Active{
+  if(isSingleton(this.object)){
+      equals(DoorController.CheckingDoorway);
+  }
+}
+
+DoorController::Inactive{
+  starts(Doorman.Inactive);
+}
+
+// This will force failure. Planning will not be possible.
+DoorController::CheckingDoorway{
+  1 == 0;
+}
+
+Doorman doorman = new Doorman(Internal);
+DoorController door_controller = new DoorController(Internal);
+CheckPath check_path = new CheckPath(External);
+
+fact(doorman.Inactive);
+fact(door_controller.Inactive);
+
+rejectable(check_path.Active cmd);

@@ -1,0 +1,10 @@
+SubDir TREX agent ;
+
+if ! $(TREX_READY) {
+ # TREX depends on these EUROPA Libraries. It does not actually use resources yet, but
+ # it could.
+ Module TREX : NDDL Solvers Resource ;
+ SubInclude TREX agent base ;
+ SubInclude TREX agent component ;
+ SubInclude TREX agent test ;
+}

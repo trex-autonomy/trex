@@ -1,0 +1,531 @@
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/driver/driver.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/common/nav.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/rcs/nav/exports.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/rcs/rcs.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/deprecated/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/nddl/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/deprecated/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/TREX.nddl doesn't exist
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex/TREX/agent/base/TREX.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/ros.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/deprecated/ros.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/ros.nddl doesn't exist
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/nddl/ros.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/deprecated/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/nddl/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/deprecated/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/TREX.nddl doesn't exist
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex/TREX/agent/base/TREX.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/common/move_behavior.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/deprecated/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/nddl/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/deprecated/TREX.nddl doesn't exist
+[NddlInterpreter]/u/jbohren/ros/ros-pkg-branch-trex/trex_ros/TREX.nddl doesn't exist
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex/TREX/agent/base/TREX.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/world_model/topological_map.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/state_estimator/exports.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/mechanism_control/exports.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/rcs/nav/exports.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/rcs/plugs/exports.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/rcs/rcs.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/world_model/topological_map.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/rcs/doors/exports.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/rcs/rcs.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/rcs/state_estimator/exports.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/rcs/rcs.nddl
+[NddlInterpreter]$EUROPA_HOME is not defined, therefore not added to NddlInterpreter include path
+[NddlInterpreter]Found:/u/jbohren/ros/ros-pkg-branch-trex/trex_pr2/nddl/common/move_behavior.nddl
+[NddlInterpreter:interpret]NDDL AST:
+(NDDL (enum TokenStates ({ INACTIVE ACTIVE MERGED REJECTED)) (class Timeline {) (VARIABLE float TICK_DURATION) (VARIABLE int MISSION_END) (VARIABLE int AGENT_CLOCK) (enum Mode ({ External Internal Ignore)) (class AgentTimeline (extends Timeline) ({ (VARIABLE Mode mode) (VARIABLE string defaultPredicate) (VARIABLE bool persistent) (predicate undefined {) (predicate Terminated ({ (CONSTRAINT_INSTANTIATION concurrent (( end MISSION_END)))) (CONSTRUCTOR AgentTimeline (( (VARIABLE _mode Mode)) ({ (= mode _mode) (= defaultPredicate "undefined") (= persistent true))) (CONSTRUCTOR AgentTimeline (( (VARIABLE _mode Mode) (VARIABLE _defaultPredicate string)) ({ (= mode _mode) (= defaultPredicate _defaultPredicate) (= persistent true))) (CONSTRUCTOR AgentTimeline (( (VARIABLE _mode Mode) (VARIABLE _defaultPredicate string) (VARIABLE _persistent bool)) ({ (= mode _mode) (= defaultPredicate _defaultPredicate) (= persistent _persistent))))) (class AgentActions ({ (predicate startEvent ({ (CONSTRAINT_INSTANTIATION eq (( duration 1)))) (CONSTRUCTOR AgentActions ( {))) (class StateVariable (extends AgentTimeline) ({ (predicate Holds ({ (CONSTRAINT_INSTANTIATION eq (( duration 1)))) (CONSTRUCTOR StateVariable (( (VARIABLE _mode Mode)) ({ (super (( _mode)))) (CONSTRUCTOR StateVariable (( (VARIABLE _mode Mode) (VARIABLE _defaultPredicate string)) ({ (super (( _mode _defaultPredicate)))))) (enum ResultStatus ({ UNDEFINED SUCCESS ABORTED PREEMPTED)) (class Behavior (extends AgentTimeline) ({ (predicate Inactive ({ (VARIABLE ResultStatus status))) (predicate Active ({ (VARIABLE int dispatch_time) (VARIABLE int max_duration) (CONSTRAINT_INSTANTIATION precedes (( dispatch_time start)) (CONSTRAINT_INSTANTIATION temporalDistance (( start ([ 1 inf) MISSION_END)) (CONSTRAINT_INSTANTIATION trex_behavior (( object)))) (CONSTRUCTOR Behavior (( (VARIABLE _mode Mode)) ({ (super (( _mode "Inactive" false)))))) (:: Behavior Active ({ (TOKEN_RELATION meets (( (PREDICATE_INSTANCE Inactive _reserved_s))) (EXPRESSION_ENFORCE (<= max_duration (- end start))))) (:: Behavior Inactive ({ (CONSTRAINT_INSTANTIATION defaultOnCommit (( status UNDEFINED)))) (typedef TIME_ERROR_BOUND int ([ -1 1)) (class ROSStateVariable (extends AgentTimeline) ({ (predicate Holds {) (CONSTRUCTOR ROSStateVariable (( (VARIABLE _mode Mode)) ({ (super (( _mode "Holds")))) (CONSTRUCTOR ROSStateVariable (( (VARIABLE _mode Mode) (VARIABLE _default_value string) (VARIABLE _persistent bool)) ({ (super (( _mode _default_value _persistent)))) (CONSTRUCTOR ROSStateVariable (( (VARIABLE _mode Mode) (VARIABLE _pred string)) ({ (super (( _mode _pred)))) (CONSTRUCTOR ROSStateVariable (( (VARIABLE _mode Mode) (VARIABLE _pred string) (VARIABLE _opt bool)) ({ (super (( _mode _pred _opt)))))) (class StateMachine (extends AgentTimeline) ({ (predicate Inactive ({ (VARIABLE ResultStatus status) (CONSTRAINT_INSTANTIATION defaultOnCommit (( status UNDEFINED)) (CONSTRAINT_INSTANTIATION temporalDistance (( start ([ 1 inf) MISSION_END)))) (CONSTRUCTOR StateMachine ( ({ (super (( Internal "Inactive")))) (CONSTRUCTOR StateMachine (( (VARIABLE _mode Mode) (VARIABLE _default_value string) (VARIABLE _persistent bool)) ({ (super (( Internal "Inactive" _persistent)))))) (class ROSAction (extends Behavior) ({ (CONSTRUCTOR ROSAction (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (:: ROSAction Active ({ (VARIABLE int time_since_dispatch) (EXPRESSION_ENFORCE (== (+ dispatch_time time_since_dispatch) start)) (EXPRESSION_ENFORCE (<= time_since_dispatch 100)))) (class BooleanTimeline (extends AgentTimeline) ({ (predicate True {) (predicate False {) (CONSTRUCTOR BooleanTimeline (( (VARIABLE _mode Mode) (VARIABLE _default_value string)) ({ (super (( _mode _default_value true)))) (CONSTRUCTOR BooleanTimeline (( (VARIABLE _mode Mode) (VARIABLE _default_value string) (VARIABLE _persistent bool)) ({ (super (( _mode _default_value _persistent)))))) (class StopAction (extends ROSAction) ({ (predicate Active ({ (VARIABLE string action_name))) (CONSTRUCTOR StopAction (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (VARIABLE float (= BASE_POSITION_ERROR 1.0)) (VARIABLE float (= ANGLE_ERROR 0.2)) (typedef UNIT_FLOAT float ([ 0.0 1.0)) (class NavigationBehavior (extends ROSAction) ({ (CONSTRUCTOR NavigationBehavior (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class MoveBase (extends NavigationBehavior) ({ (predicate Inactive ({ (VARIABLE float time_stamp) (VARIABLE string frame_id) (VARIABLE float x) (VARIABLE float y) (VARIABLE float z) (VARIABLE float qx) (VARIABLE float qy) (VARIABLE float qz) (VARIABLE float qw))) (predicate Active ({ (VARIABLE float time_stamp) (VARIABLE string frame_id) (VARIABLE float x) (VARIABLE float y) (VARIABLE float z) (VARIABLE float qx) (VARIABLE float qy) (VARIABLE float qz) (VARIABLE float qw))) (CONSTRUCTOR MoveBase (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class CheckPath (extends NavigationBehavior) ({ (predicate Active ({ (VARIABLE float time_stamp) (VARIABLE string frame_id) (VARIABLE float x) (VARIABLE float y) (VARIABLE float z) (VARIABLE float qx) (VARIABLE float qy) (VARIABLE float qz) (VARIABLE float qw))) (predicate Inactive ({ (VARIABLE bool is_clear))) (CONSTRUCTOR CheckPath (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (typedef MAP_KEY int ([ 0 100000)) (VARIABLE MAP_KEY (= NO_KEY 0)) (class Location ({ (VARIABLE string frame_id) (VARIABLE float x) (VARIABLE float y) (VARIABLE float z) (VARIABLE float qx) (VARIABLE float qy) (VARIABLE float qz) (VARIABLE float qw) (CONSTRUCTOR Location (( (VARIABLE x_ float) (VARIABLE y_ float) (VARIABLE z_ float) (VARIABLE qx_ float) (VARIABLE qy_ float) (VARIABLE qz_ float) (VARIABLE qw_ float)) ({ (= frame_id "map") (= x x_) (= y y_) (= z z_) (= qx qx_) (= qy qy_) (= qz qz_) (= qw qw_))))) (class Waypoint (extends Location) ({ (CONSTRUCTOR Waypoint (( (VARIABLE x_ float) (VARIABLE y_ float) (VARIABLE z_ float) (VARIABLE qx_ float) (VARIABLE qy_ float) (VARIABLE qz_ float) (VARIABLE qw_ float)) ({ (super (( x_ y_ z_ qx_ qy_ qz_ qw_)))))) (class ChargingStation (extends Location) ({ (CONSTRUCTOR ChargingStation (( (VARIABLE x_ float) (VARIABLE y_ float) (VARIABLE z_ float) (VARIABLE qx_ float) (VARIABLE qy_ float) (VARIABLE qz_ float) (VARIABLE qw_ float)) ({ (super (( x_ y_ z_ qx_ qy_ qz_ qw_)))))) (class MoveBehavior (extends Behavior) ({ (predicate Inactive ({ (VARIABLE string frame_id) (VARIABLE float time_stamp) (VARIABLE float x) (VARIABLE float y) (VARIABLE float z) (VARIABLE float qx) (VARIABLE float qy) (VARIABLE float qz) (VARIABLE float qw))) (predicate Active ({ (VARIABLE string frame_id) (VARIABLE float time_stamp) (VARIABLE float x) (VARIABLE float y) (VARIABLE float z) (VARIABLE float qx) (VARIABLE float qy) (VARIABLE float qz) (VARIABLE float qw) (VARIABLE MAP_KEY start_connector))) (CONSTRUCTOR MoveBehavior (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (:: MoveBehavior Inactive ({ (if (EXPRESSION_RETURN (== status SUCCESS)) ({ (TOKEN_RELATION met_by (( (PREDICATE_INSTANCE Active p))) (CONSTRAINT_INSTANTIATION eq_pose_msg (( object (. p object))))))) (class Mechanism (extends AgentTimeline) ({ (predicate uncontrolled {) (CONSTRUCTOR Mechanism (( (VARIABLE _mode Mode)) ({ (super (( _mode "uncontrolled")))))) (class HeadMechanism (extends Mechanism) ({ (predicate use_head_controller {) (CONSTRUCTOR HeadMechanism (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class RightArmMechanism (extends Mechanism) ({ (predicate use_cartesian_trajectory_controller {) (predicate use_joint_trajectory_controller {) (predicate use_constraint_composite_cartesian_pose_controller {) (predicate use_composite_cartesian_trajectory_controller {) (predicate use_constraint_composite_cartesian_trajectory_controller {) (predicate use_composite_tff_controller {) (predicate use_hybrid_controller {) (CONSTRUCTOR RightArmMechanism (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class RightGripperMechanism (extends Mechanism) ({ (predicate use_position_controller {) (predicate use_effort_controller {) (CONSTRUCTOR RightGripperMechanism (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class TiltLaserMechanism (extends Mechanism) ({ (predicate use_laser_tilt_controller {) (CONSTRUCTOR TiltLaserMechanism (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class PlugDomainAction (extends ROSAction) ({ (CONSTRUCTOR PlugDomainAction (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class PlugsUntuckArms (extends PlugDomainAction) ({ (CONSTRUCTOR PlugsUntuckArms (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class DetectPlugOnBase (extends PlugDomainAction) ({ (predicate Inactive ({ (VARIABLE float time_stamp) (VARIABLE string frame_id) (VARIABLE bool stowed) (VARIABLE float x) (VARIABLE float y) (VARIABLE float z))) (CONSTRUCTOR DetectPlugOnBase (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class StowPlug (extends PlugDomainAction) ({ (predicate Active ({ (VARIABLE float time_stamp) (VARIABLE string frame_id) (VARIABLE bool stowed) (VARIABLE float x) (VARIABLE float y) (VARIABLE float z))) (CONSTRUCTOR StowPlug (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class Unplug (extends PlugDomainAction) ({ (CONSTRUCTOR Unplug (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class PlugIn (extends PlugDomainAction) ({ (predicate Active ({ (VARIABLE MAP_KEY outlet_id))) (CONSTRUCTOR PlugIn (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class DetectOutletFine (extends PlugDomainAction) ({ (predicate Active ({ (VARIABLE float time_stamp) (VARIABLE string frame_id) (VARIABLE float x) (VARIABLE float y) (VARIABLE float z))) (predicate Inactive ({ (VARIABLE float time_stamp) (VARIABLE string frame_id) (VARIABLE float x) (VARIABLE float y) (VARIABLE float z) (VARIABLE float qx) (VARIABLE float qy) (VARIABLE float qz) (VARIABLE float qw))) (CONSTRUCTOR DetectOutletFine (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class DetectOutletCoarse (extends PlugDomainAction) ({ (predicate Active ({ (VARIABLE float time_stamp) (VARIABLE string frame_id) (VARIABLE float x) (VARIABLE float y) (VARIABLE float z))) (predicate Inactive ({ (VARIABLE float time_stamp) (VARIABLE string frame_id) (VARIABLE float x) (VARIABLE float y) (VARIABLE float z) (VARIABLE float qx) (VARIABLE float qy) (VARIABLE float qz) (VARIABLE float qw))) (CONSTRUCTOR DetectOutletCoarse (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class LocalizePlugInGripper (extends PlugDomainAction) ({ (predicate Active ({ (VARIABLE float time_stamp) (VARIABLE string frame_id) (VARIABLE float x) (VARIABLE float y) (VARIABLE float z) (VARIABLE float qx) (VARIABLE float qy) (VARIABLE float qz) (VARIABLE float qw))) (CONSTRUCTOR LocalizePlugInGripper (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class MoveAndGraspPlug (extends PlugDomainAction) ({ (predicate Active ({ (VARIABLE float time_stamp) (VARIABLE string frame_id) (VARIABLE bool stowed) (VARIABLE float x) (VARIABLE float y) (VARIABLE float z))) (CONSTRUCTOR MoveAndGraspPlug (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (VARIABLE int (= UNKNOWN 0)) (VARIABLE int (= FRAME_P1 1)) (VARIABLE int (= FRAME_P2 2)) (typedef HINGE_FRAME int ([ 0 2)) (VARIABLE int (= ROT_DIR_CLOCKWISE 1)) (VARIABLE int (= ROT_DIR_COUNTERCLOCKWISE 2)) (typedef ROTATION_DIRECTION int ([ 0 2)) (typedef LatchState int ([ 0 3)) (VARIABLE int (= LATCH_STATE_LOCKED 1)) (VARIABLE int (= LATCH_STATE_LATCHED 2)) (VARIABLE int (= LATCH_STATE_UNLATCHED 3)) (class DoorAction (extends ROSAction) ({ (predicate Active ({ (VARIABLE float time_stamp) (VARIABLE string frame_id) (VARIABLE LatchState latch_state) (VARIABLE float frame_p1_x) (VARIABLE float frame_p1_y) (VARIABLE float frame_p1_z) (VARIABLE float frame_p2_x) (VARIABLE float frame_p2_y) (VARIABLE float frame_p2_z) (VARIABLE float height) (VARIABLE HINGE_FRAME hinge) (VARIABLE ROTATION_DIRECTION rot_dir) (VARIABLE float door_p1_x) (VARIABLE float door_p1_y) (VARIABLE float door_p1_z) (VARIABLE float door_p2_x) (VARIABLE float door_p2_y) (VARIABLE float door_p2_z) (VARIABLE float handle_x) (VARIABLE float handle_y) (VARIABLE float handle_z) (VARIABLE float travel_dir_x) (VARIABLE float travel_dir_y) (VARIABLE float travel_dir_z))) (predicate Inactive ({ (VARIABLE float time_stamp) (VARIABLE string frame_id) (VARIABLE LatchState latch_state) (VARIABLE float frame_p1_x) (VARIABLE float frame_p1_y) (VARIABLE float frame_p1_z) (VARIABLE float frame_p2_x) (VARIABLE float frame_p2_y) (VARIABLE float frame_p2_z) (VARIABLE float height) (VARIABLE HINGE_FRAME hinge) (VARIABLE ROTATION_DIRECTION rot_dir) (VARIABLE float door_p1_x) (VARIABLE float door_p1_y) (VARIABLE float door_p1_z) (VARIABLE float door_p2_x) (VARIABLE float door_p2_y) (VARIABLE float door_p2_z) (VARIABLE float handle_x) (VARIABLE float handle_y) (VARIABLE float handle_z) (VARIABLE float travel_dir_x) (VARIABLE float travel_dir_y) (VARIABLE float travel_dir_z) (CONSTRAINT_INSTANTIATION defaultOnCommit (( hinge UNKNOWN)) (CONSTRAINT_INSTANTIATION defaultOnCommit (( rot_dir UNKNOWN)))) (CONSTRUCTOR DoorAction (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class GraspHandle (extends DoorAction) ({ (CONSTRUCTOR GraspHandle (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class MoveBaseDoor (extends DoorAction) ({ (CONSTRUCTOR MoveBaseDoor (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class TouchDoor (extends DoorAction) ({ (CONSTRUCTOR TouchDoor (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class PushDoor (extends DoorAction) ({ (CONSTRUCTOR PushDoor (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class OpenDoor (extends DoorAction) ({ (CONSTRUCTOR OpenDoor (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class DoorActionWithFeedback (extends DoorAction) ({ (CONSTRUCTOR DoorActionWithFeedback (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class UnlatchHandle (extends DoorActionWithFeedback) ({ (CONSTRUCTOR UnlatchHandle (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class DetectDoor (extends DoorActionWithFeedback) ({ (CONSTRUCTOR DetectDoor (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class DetectHandle (extends DoorActionWithFeedback) ({ (CONSTRUCTOR DetectHandle (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class SafetyTuckArms (extends ROSAction) ({ (CONSTRUCTOR SafetyTuckArms (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class ReleaseHandle (extends ROSAction) ({ (CONSTRUCTOR ReleaseHandle (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class SetLaserTilt (extends ROSAction) ({ (CONSTRUCTOR SetLaserTilt (( (VARIABLE _mode Mode)) ({ (super (( _mode)))))) (class ArmsTucked (extends BooleanTimeline) ({ (CONSTRUCTOR ArmsTucked (( (VARIABLE _mode Mode)) ({ (super (( _mode "False")))))) (class TiltLaserReady (extends BooleanTimeline) ({ (CONSTRUCTOR TiltLaserReady (( (VARIABLE _mode Mode)) ({ (super (( _mode "False")))))) (class GripperFree (extends BooleanTimeline) ({ (CONSTRUCTOR GripperFree (( (VARIABLE _mode Mode)) ({ (super (( _mode "True")))))) (VARIABLE float (= SAFETY_TUCK_ARMS_DURATION_BOUND 600.0)) (VARIABLE float (= RELEASE_HANDLE_DURATION_BOUND 300.0)) (VARIABLE ArmsTucked (= arms_tucked (CONSTRUCTOR_INVOCATION ArmsTucked (( External)))) (VARIABLE TiltLaserReady (= tilt_laser_ready (CONSTRUCTOR_INVOCATION TiltLaserReady (( External)))) (VARIABLE GripperFree (= gripper_free (CONSTRUCTOR_INVOCATION GripperFree (( External)))) (VARIABLE TiltLaserMechanism (= laser_tilt_mechanism (CONSTRUCTOR_INVOCATION TiltLaserMechanism (( External)))) (VARIABLE RightArmMechanism (= right_arm_mechanism (CONSTRUCTOR_INVOCATION RightArmMechanism (( External)))) (VARIABLE RightGripperMechanism (= right_gripper_mechanism (CONSTRUCTOR_INVOCATION RightGripperMechanism (( External)))) (VARIABLE SafetyTuckArms (= safety_tuck_arms (CONSTRUCTOR_INVOCATION SafetyTuckArms (( External)))) (VARIABLE SetLaserTilt (= set_laser_tilt (CONSTRUCTOR_INVOCATION SetLaserTilt (( External)))) (VARIABLE ReleaseHandle (= release_handle (CONSTRUCTOR_INVOCATION ReleaseHandle (( External)))) (:: ArmsTucked True ({ (TOKEN_RELATION met_by (( (PREDICATE_INSTANCE (. safety_tuck_arms Active) p))) (EXPRESSION_ENFORCE (== (FUNCTION_CALL isSucceded (( (. p object))) true)) (EXPRESSION_ENFORCE (<= (. p max_duration) SAFETY_TUCK_ARMS_DURATION_BOUND)))) (:: TiltLaserReady True ({ (TOKEN_RELATION met_by (( (PREDICATE_INSTANCE (. set_laser_tilt Active) p))) (EXPRESSION_ENFORCE (== (FUNCTION_CALL isSucceded (( (. p object))) true)))) (:: GripperFree True ({ (TOKEN_RELATION met_by (( (PREDICATE_INSTANCE (. release_handle Active) p))) (EXPRESSION_ENFORCE (== (FUNCTION_CALL isSucceded (( (. p object))) true)) (EXPRESSION_ENFORCE (<= (. p max_duration) RELEASE_HANDLE_DURATION_BOUND)))) (:: SafetyTuckArms Active ({ (TOKEN_RELATION contained_by (( (PREDICATE_INSTANCE (. right_arm_mechanism use_joint_trajectory_controller)))) (TOKEN_RELATION contained_by (( (PREDICATE_INSTANCE (. right_gripper_mechanism use_effort_controller)))) (TOKEN_RELATION contained_by (( (PREDICATE_INSTANCE (. gripper_free True)))))) (:: SetLaserTilt Active ({ (TOKEN_RELATION contained_by (( (PREDICATE_INSTANCE (. laser_tilt_mechanism use_laser_tilt_controller)))))) (:: ReleaseHandle Active ({ (TOKEN_RELATION contained_by (( (PREDICATE_INSTANCE (. right_arm_mechanism use_constraint_composite_cartesian_trajectory_controller)))) (TOKEN_RELATION contained_by (( (PREDICATE_INSTANCE (. right_gripper_mechanism use_effort_controller)))))) (VARIABLE HeadMechanism (= head_mechanism (CONSTRUCTOR_INVOCATION HeadMechanism (( External)))) (:: MoveBase Active ({ (TOKEN_RELATION contained_by (( (PREDICATE_INSTANCE (. head_mechanism use_head_controller)))) (TOKEN_RELATION contained_by (( (PREDICATE_INSTANCE (. laser_tilt_mechanism use_laser_tilt_controller)))))) (:: NavigationBehavior Active ({ (TOKEN_RELATION contained_by (( (PREDICATE_INSTANCE (. arms_tucked True)))) (TOKEN_RELATION contained_by (( (PREDICATE_INSTANCE (. tilt_laser_ready True)))))) (VARIABLE MoveBehavior (= driver (CONSTRUCTOR_INVOCATION MoveBehavior (( Internal)))) (VARIABLE MoveBase (= move_base (CONSTRUCTOR_INVOCATION MoveBase (( External)))) (:: MoveBehavior Active ({ (TOKEN_RELATION ends (( (PREDICATE_INSTANCE (. move_base Active) cmd))) (TOKEN_RELATION contains cmd) (EXPRESSION_ENFORCE (<= (. cmd max_duration) max_duration)) (CONSTRAINT_INSTANTIATION eq_pose_msg (( (. cmd object) (. this object))))) (:: MoveBase Inactive ({ (TOKEN_RELATION starts_during (( (PREDICATE_INSTANCE (. driver Inactive) d))) (CONSTRAINT_INSTANTIATION eq (( (. d status) status)))) (METHOD_CALL close ())
+[NddlInterpreter:nddl]Evaluating:ENUMDEF:TokenStates
+[NddlInterpreter:nddl]Evaluating:class Timeline extends extends Object {
+
+
+}
+
+[NddlInterpreter:nddl]Evaluating:float TICK_DURATION
+
+[NddlInterpreter:nddl]Evaluating:int MISSION_END
+
+[NddlInterpreter:nddl]Evaluating:int AGENT_CLOCK
+
+[NddlInterpreter:nddl]Evaluating:ENUMDEF:Mode
+[NddlInterpreter:nddl]Evaluating:class AgentTimeline extends extends Timeline {
+    string defaultPredicate
+    Mode mode
+    bool persistent
+
+    AgentTimeline:Mode
+    AgentTimeline:Mode:string
+    AgentTimeline:Mode:string:bool
+
+    AgentTimeline.undefined
+    AgentTimeline.Terminated
+}
+
+[NddlInterpreter:nddl]Evaluating:class AgentActions extends extends Object {
+
+    AgentActions
+
+    AgentActions.startEvent
+}
+
+[NddlInterpreter:nddl]Evaluating:class StateVariable extends extends AgentTimeline {
+
+    StateVariable:Mode
+    StateVariable:Mode:string
+
+    StateVariable.Holds
+}
+
+[NddlInterpreter:nddl]Evaluating:ENUMDEF:ResultStatus
+[NddlInterpreter:nddl]Evaluating:class Behavior extends extends AgentTimeline {
+
+    Behavior:Mode
+
+    Behavior.Active int->dispatch_time int->max_duration
+    Behavior.Inactive ResultStatus->status
+}
+
+[NddlInterpreter]Parsing rule for:Behavior.Active
+[NddlInterpreter:nddl]Evaluating:RuleFactory Behavior.Active
+[NddlInterpreter]Parsing rule for:Behavior.Inactive
+[NddlInterpreter:nddl]Evaluating:RuleFactory Behavior.Inactive
+[NddlInterpreter:nddl]Evaluating:TYPEDEF:int -> TIME_ERROR_BOUND
+[NddlInterpreter:nddl]Evaluating:class ROSStateVariable extends extends AgentTimeline {
+
+    ROSStateVariable:Mode
+    ROSStateVariable:Mode:string:bool
+    ROSStateVariable:Mode:string
+
+    ROSStateVariable.Holds
+}
+
+[NddlInterpreter:nddl]Evaluating:class StateMachine extends extends AgentTimeline {
+
+    StateMachine
+    StateMachine:Mode:string:bool
+
+    StateMachine.Inactive ResultStatus->status
+}
+
+[NddlInterpreter:nddl]Evaluating:class ROSAction extends extends Behavior {
+
+    ROSAction:Mode
+
+}
+
+[NddlInterpreter]Parsing rule for:ROSAction.Active
+[NddlInterpreter:nddl]Evaluating:RuleFactory ROSAction.Active
+[NddlInterpreter:nddl]Evaluating:class BooleanTimeline extends extends AgentTimeline {
+
+    BooleanTimeline:Mode:string
+    BooleanTimeline:Mode:string:bool
+
+    BooleanTimeline.True
+    BooleanTimeline.False
+}
+
+[NddlInterpreter:nddl]Evaluating:class StopAction extends extends ROSAction {
+
+    StopAction:Mode
+
+    StopAction.Active string->action_name
+}
+
+[NddlInterpreter:nddl]Evaluating:float BASE_POSITION_ERROR {CONSTANT float float:CLOSED[1.000000000000000, 1.000000000000000]}
+
+[NddlInterpreter:nddl]Evaluating:float ANGLE_ERROR {CONSTANT float float:CLOSED[0.200000000000000, 0.200000000000000]}
+
+[NddlInterpreter:nddl]Evaluating:TYPEDEF:float -> UNIT_FLOAT
+[NddlInterpreter:nddl]Evaluating:class NavigationBehavior extends extends ROSAction {
+
+    NavigationBehavior:Mode
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class MoveBase extends extends NavigationBehavior {
+
+    MoveBase:Mode
+
+    MoveBase.Inactive string->frame_id float->qw float->qx float->qy float->qz float->time_stamp float->x float->y float->z
+    MoveBase.Active string->frame_id float->qw float->qx float->qy float->qz float->time_stamp float->x float->y float->z
+}
+
+[NddlInterpreter:nddl]Evaluating:class CheckPath extends extends NavigationBehavior {
+
+    CheckPath:Mode
+
+    CheckPath.Active string->frame_id float->qw float->qx float->qy float->qz float->time_stamp float->x float->y float->z
+    CheckPath.Inactive bool->is_clear
+}
+
+[NddlInterpreter:nddl]Evaluating:TYPEDEF:int -> MAP_KEY
+[NddlInterpreter:nddl]Evaluating:MAP_KEY NO_KEY {CONSTANT int int:CLOSED[0, 0]}
+
+[NddlInterpreter:nddl]Evaluating:class Location extends extends Object {
+    string frame_id
+    float qw
+    float qx
+    float qy
+    float qz
+    float x
+    float y
+    float z
+
+    Location:float:float:float:float:float:float:float
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class Waypoint extends extends Location {
+
+    Waypoint:float:float:float:float:float:float:float
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class ChargingStation extends extends Location {
+
+    ChargingStation:float:float:float:float:float:float:float
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class MoveBehavior extends extends Behavior {
+
+    MoveBehavior:Mode
+
+    MoveBehavior.Inactive string->frame_id float->qw float->qx float->qy float->qz float->time_stamp float->x float->y float->z
+    MoveBehavior.Active string->frame_id float->qw float->qx float->qy float->qz MAP_KEY->start_connector float->time_stamp float->x float->y float->z
+}
+
+[NddlInterpreter]Parsing rule for:MoveBehavior.Inactive
+[NddlInterpreter:nddl]Evaluating:RuleFactory MoveBehavior.Inactive
+[NddlInterpreter:nddl]Evaluating:class Mechanism extends extends AgentTimeline {
+
+    Mechanism:Mode
+
+    Mechanism.uncontrolled
+}
+
+[NddlInterpreter:nddl]Evaluating:class HeadMechanism extends extends Mechanism {
+
+    HeadMechanism:Mode
+
+    HeadMechanism.use_head_controller
+}
+
+[NddlInterpreter:nddl]Evaluating:class RightArmMechanism extends extends Mechanism {
+
+    RightArmMechanism:Mode
+
+    RightArmMechanism.use_cartesian_trajectory_controller
+    RightArmMechanism.use_joint_trajectory_controller
+    RightArmMechanism.use_constraint_composite_cartesian_pose_controller
+    RightArmMechanism.use_composite_cartesian_trajectory_controller
+    RightArmMechanism.use_constraint_composite_cartesian_trajectory_controller
+    RightArmMechanism.use_composite_tff_controller
+    RightArmMechanism.use_hybrid_controller
+}
+
+[NddlInterpreter:nddl]Evaluating:class RightGripperMechanism extends extends Mechanism {
+
+    RightGripperMechanism:Mode
+
+    RightGripperMechanism.use_position_controller
+    RightGripperMechanism.use_effort_controller
+}
+
+[NddlInterpreter:nddl]Evaluating:class TiltLaserMechanism extends extends Mechanism {
+
+    TiltLaserMechanism:Mode
+
+    TiltLaserMechanism.use_laser_tilt_controller
+}
+
+[NddlInterpreter:nddl]Evaluating:class PlugDomainAction extends extends ROSAction {
+
+    PlugDomainAction:Mode
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class PlugsUntuckArms extends extends PlugDomainAction {
+
+    PlugsUntuckArms:Mode
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class DetectPlugOnBase extends extends PlugDomainAction {
+
+    DetectPlugOnBase:Mode
+
+    DetectPlugOnBase.Inactive string->frame_id bool->stowed float->time_stamp float->x float->y float->z
+}
+
+[NddlInterpreter:nddl]Evaluating:class StowPlug extends extends PlugDomainAction {
+
+    StowPlug:Mode
+
+    StowPlug.Active string->frame_id bool->stowed float->time_stamp float->x float->y float->z
+}
+
+[NddlInterpreter:nddl]Evaluating:class Unplug extends extends PlugDomainAction {
+
+    Unplug:Mode
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class PlugIn extends extends PlugDomainAction {
+
+    PlugIn:Mode
+
+    PlugIn.Active MAP_KEY->outlet_id
+}
+
+[NddlInterpreter:nddl]Evaluating:class DetectOutletFine extends extends PlugDomainAction {
+
+    DetectOutletFine:Mode
+
+    DetectOutletFine.Active string->frame_id float->time_stamp float->x float->y float->z
+    DetectOutletFine.Inactive string->frame_id float->qw float->qx float->qy float->qz float->time_stamp float->x float->y float->z
+}
+
+[NddlInterpreter:nddl]Evaluating:class DetectOutletCoarse extends extends PlugDomainAction {
+
+    DetectOutletCoarse:Mode
+
+    DetectOutletCoarse.Active string->frame_id float->time_stamp float->x float->y float->z
+    DetectOutletCoarse.Inactive string->frame_id float->qw float->qx float->qy float->qz float->time_stamp float->x float->y float->z
+}
+
+[NddlInterpreter:nddl]Evaluating:class LocalizePlugInGripper extends extends PlugDomainAction {
+
+    LocalizePlugInGripper:Mode
+
+    LocalizePlugInGripper.Active string->frame_id float->qw float->qx float->qy float->qz float->time_stamp float->x float->y float->z
+}
+
+[NddlInterpreter:nddl]Evaluating:class MoveAndGraspPlug extends extends PlugDomainAction {
+
+    MoveAndGraspPlug:Mode
+
+    MoveAndGraspPlug.Active string->frame_id bool->stowed float->time_stamp float->x float->y float->z
+}
+
+[NddlInterpreter:nddl]Evaluating:int UNKNOWN {CONSTANT int int:CLOSED[0, 0]}
+
+[NddlInterpreter:nddl]Evaluating:int FRAME_P1 {CONSTANT int int:CLOSED[1, 1]}
+
+[NddlInterpreter:nddl]Evaluating:int FRAME_P2 {CONSTANT int int:CLOSED[2, 2]}
+
+[NddlInterpreter:nddl]Evaluating:TYPEDEF:int -> HINGE_FRAME
+[NddlInterpreter:nddl]Evaluating:int ROT_DIR_CLOCKWISE {CONSTANT int int:CLOSED[1, 1]}
+
+[NddlInterpreter:nddl]Evaluating:int ROT_DIR_COUNTERCLOCKWISE {CONSTANT int int:CLOSED[2, 2]}
+
+[NddlInterpreter:nddl]Evaluating:TYPEDEF:int -> ROTATION_DIRECTION
+[NddlInterpreter:nddl]Evaluating:TYPEDEF:int -> LatchState
+[NddlInterpreter:nddl]Evaluating:int LATCH_STATE_LOCKED {CONSTANT int int:CLOSED[1, 1]}
+
+[NddlInterpreter:nddl]Evaluating:int LATCH_STATE_LATCHED {CONSTANT int int:CLOSED[2, 2]}
+
+[NddlInterpreter:nddl]Evaluating:int LATCH_STATE_UNLATCHED {CONSTANT int int:CLOSED[3, 3]}
+
+[NddlInterpreter:nddl]Evaluating:class DoorAction extends extends ROSAction {
+
+    DoorAction:Mode
+
+    DoorAction.Active float->door_p1_x float->door_p1_y float->door_p1_z float->door_p2_x float->door_p2_y float->door_p2_z string->frame_id float->frame_p1_x float->frame_p1_y float->frame_p1_z float->frame_p2_x float->frame_p2_y float->frame_p2_z float->handle_x float->handle_y float->handle_z float->height HINGE_FRAME->hinge LatchState->latch_state ROTATION_DIRECTION->rot_dir float->time_stamp float->travel_dir_x float->travel_dir_y float->travel_dir_z
+    DoorAction.Inactive float->door_p1_x float->door_p1_y float->door_p1_z float->door_p2_x float->door_p2_y float->door_p2_z string->frame_id float->frame_p1_x float->frame_p1_y float->frame_p1_z float->frame_p2_x float->frame_p2_y float->frame_p2_z float->handle_x float->handle_y float->handle_z float->height HINGE_FRAME->hinge LatchState->latch_state ROTATION_DIRECTION->rot_dir float->time_stamp float->travel_dir_x float->travel_dir_y float->travel_dir_z
+}
+
+[NddlInterpreter:nddl]Evaluating:class GraspHandle extends extends DoorAction {
+
+    GraspHandle:Mode
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class MoveBaseDoor extends extends DoorAction {
+
+    MoveBaseDoor:Mode
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class TouchDoor extends extends DoorAction {
+
+    TouchDoor:Mode
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class PushDoor extends extends DoorAction {
+
+    PushDoor:Mode
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class OpenDoor extends extends DoorAction {
+
+    OpenDoor:Mode
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class DoorActionWithFeedback extends extends DoorAction {
+
+    DoorActionWithFeedback:Mode
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class UnlatchHandle extends extends DoorActionWithFeedback {
+
+    UnlatchHandle:Mode
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class DetectDoor extends extends DoorActionWithFeedback {
+
+    DetectDoor:Mode
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class DetectHandle extends extends DoorActionWithFeedback {
+
+    DetectHandle:Mode
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class SafetyTuckArms extends extends ROSAction {
+
+    SafetyTuckArms:Mode
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class ReleaseHandle extends extends ROSAction {
+
+    ReleaseHandle:Mode
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class SetLaserTilt extends extends ROSAction {
+
+    SetLaserTilt:Mode
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class ArmsTucked extends extends BooleanTimeline {
+
+    ArmsTucked:Mode
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class TiltLaserReady extends extends BooleanTimeline {
+
+    TiltLaserReady:Mode
+
+}
+
+[NddlInterpreter:nddl]Evaluating:class GripperFree extends extends BooleanTimeline {
+
+    GripperFree:Mode
+
+}
+
+[NddlInterpreter:nddl]Evaluating:float SAFETY_TUCK_ARMS_DURATION_BOUND {CONSTANT float float:CLOSED[600.000000000000000, 600.000000000000000]}
+
+[NddlInterpreter:nddl]Evaluating:float RELEASE_HANDLE_DURATION_BOUND {CONSTANT float float:CLOSED[300.000000000000000, 300.000000000000000]}
+
+[NddlInterpreter:nddl]Evaluating:ArmsTucked arms_tucked {NEW_OBJECT arms_tucked(ArmsTucked) {CONSTANT Mode Mode:CLOSED{External}} }
+
+[NddlInterpreter:nddl]Evaluating:TiltLaserReady tilt_laser_ready {NEW_OBJECT tilt_laser_ready(TiltLaserReady) {CONSTANT Mode Mode:CLOSED{External}} }
+
+[NddlInterpreter:nddl]Evaluating:GripperFree gripper_free {NEW_OBJECT gripper_free(GripperFree) {CONSTANT Mode Mode:CLOSED{External}} }
+
+[NddlInterpreter:nddl]Evaluating:TiltLaserMechanism laser_tilt_mechanism {NEW_OBJECT laser_tilt_mechanism(TiltLaserMechanism) {CONSTANT Mode Mode:CLOSED{External}} }
+
+[NddlInterpreter:nddl]Evaluating:RightArmMechanism right_arm_mechanism {NEW_OBJECT right_arm_mechanism(RightArmMechanism) {CONSTANT Mode Mode:CLOSED{External}} }
+
+[NddlInterpreter:nddl]Evaluating:RightGripperMechanism right_gripper_mechanism {NEW_OBJECT right_gripper_mechanism(RightGripperMechanism) {CONSTANT Mode Mode:CLOSED{External}} }
+
+[NddlInterpreter:nddl]Evaluating:SafetyTuckArms safety_tuck_arms {NEW_OBJECT safety_tuck_arms(SafetyTuckArms) {CONSTANT Mode Mode:CLOSED{External}} }
+
+[NddlInterpreter:nddl]Evaluating:SetLaserTilt set_laser_tilt {NEW_OBJECT set_laser_tilt(SetLaserTilt) {CONSTANT Mode Mode:CLOSED{External}} }
+
+[NddlInterpreter:nddl]Evaluating:ReleaseHandle release_handle {NEW_OBJECT release_handle(ReleaseHandle) {CONSTANT Mode Mode:CLOSED{External}} }
+
+[NddlInterpreter]Parsing rule for:ArmsTucked.True
+[NddlInterpreter:nddl]Evaluating:RuleFactory ArmsTucked.True
+[NddlInterpreter]Parsing rule for:TiltLaserReady.True
+[NddlInterpreter:nddl]Evaluating:RuleFactory TiltLaserReady.True
+[NddlInterpreter]Parsing rule for:GripperFree.True
+[NddlInterpreter:nddl]Evaluating:RuleFactory GripperFree.True
+[NddlInterpreter]Parsing rule for:SafetyTuckArms.Active
+[NddlInterpreter:nddl]Evaluating:RuleFactory SafetyTuckArms.Active
+[NddlInterpreter]Parsing rule for:SetLaserTilt.Active
+[NddlInterpreter:nddl]Evaluating:RuleFactory SetLaserTilt.Active
+[NddlInterpreter]Parsing rule for:ReleaseHandle.Active
+[NddlInterpreter:nddl]Evaluating:RuleFactory ReleaseHandle.Active
+[NddlInterpreter:nddl]Evaluating:HeadMechanism head_mechanism {NEW_OBJECT head_mechanism(HeadMechanism) {CONSTANT Mode Mode:CLOSED{External}} }
+
+[NddlInterpreter]Parsing rule for:MoveBase.Active
+[NddlInterpreter:nddl]Evaluating:RuleFactory MoveBase.Active
+[NddlInterpreter]Parsing rule for:NavigationBehavior.Active
+[NddlInterpreter:nddl]Evaluating:RuleFactory NavigationBehavior.Active
+[NddlInterpreter:nddl]Evaluating:MoveBehavior driver {NEW_OBJECT driver(MoveBehavior) {CONSTANT Mode Mode:CLOSED{Internal}} }
+
+[NddlInterpreter:nddl]Evaluating:MoveBase move_base {NEW_OBJECT move_base(MoveBase) {CONSTANT Mode Mode:CLOSED{External}} }
+
+[NddlInterpreter]Parsing rule for:MoveBehavior.Active
+[NddlInterpreter:nddl]Evaluating:RuleFactory MoveBehavior.Active
+[NddlInterpreter]Parsing rule for:MoveBase.Inactive
+[NddlInterpreter:nddl]Evaluating:RuleFactory MoveBase.Inactive
+[NddlInterpreter:nddl]Evaluating:VAR_METHOD:close
+[ExportReactorState][driver][0]Success.
+[trex:info:planning]Step: depth == 0 count == 0
+[trex:info:planning][driver][0]COMPLETED 
+[ExportReactorState][driver][1]Success.
+[trex:info:planning]Step: depth == 0 count == 0
+[trex:info:planning][driver][1]COMPLETED 
+[ExportReactorState][driver][2]Success.
+[trex:info:planning]Step: depth == 0 count == 0
+[trex:info:planning][driver][2]COMPLETED 
+[ExportReactorState][driver][3]Success.
+[trex:info:planning]Step: depth == 0 count == 0
+[trex:info:planning][driver][3]COMPLETED 
+[ExportReactorState][driver][4]Success.
+[trex:info:planning]Step: depth == 0 count == 0
+[trex:info:planning][driver][4]COMPLETED 
+[ExportReactorState][driver][5]Success.
+[trex:info:planning]Step: depth == 0 count == 0
+[trex:info:planning][driver][5]COMPLETED 
+[ExportReactorState][driver][6]Success.
+[trex:info:planning]Step: depth == 0 count == 0
+[trex:info:planning][driver][6]COMPLETED 
+[ExportReactorState][driver][7]Success.
+[trex:info:planning]Step: depth == 0 count == 0
+[trex:info:planning][driver][7]COMPLETED 
+[ExportReactorState][driver][8]Success.
+[trex:info:planning]Step: depth == 0 count == 0
+[trex:info:planning][driver][8]COMPLETED 

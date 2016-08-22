@@ -1,0 +1,13 @@
+#include "GamePlay.nddl"
+
+
+
+CreatorTimeline b = new CreatorTimeline(Mode.Internal);
+
+close();
+
+//Make a "delta" token in the timeline.
+fact(b.Delta bt);
+bt.end = 4;
+
+

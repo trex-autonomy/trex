@@ -1,0 +1,20 @@
+#summary Questions to test your understanding of background material
+
+ # [AnswerBackground#Q1 What are the key ideas behind T-REX and why are they relevant?]
+ # What is a timeline?
+ # What is a token?
+ # What is a variable?
+ # What is a constraint?
+ # What is a causal link?
+ # What is an Allen relation?
+ # What is a flaw?
+ # What steps can be taken to resolve a flaw?
+ # What is the language used to write models in T-REX?
+ # What is different about this language?
+ # What happens if a goal cannot be satisfied?
+ # What is the execution frontier?
+ # What do we call the process of integrating observations with the current plan state?
+ # What happens if a plan is in conflict with observations?
+ # What happens to tokens in a plan once the plan is complete?
+
+

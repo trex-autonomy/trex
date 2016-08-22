@@ -1,0 +1,13 @@
+#include "GamePlay.nddl"
+
+
+
+ValueTimeline b = new ValueTimeline(Mode.Internal);
+
+close();
+
+//Make a value token in the timeline.
+fact(b.Holds bt);
+bt.value = 42;
+
+

@@ -1,0 +1,63 @@
+#include "TREX.nddl"
+
+
+class CreatorTimeline extends AgentTimeline {
+  predicate Gamma{}
+
+  predicate Delta{}
+	
+  CreatorTimeline(Mode _mode){
+    super(_mode);
+  }
+}
+
+CreatorTimeline::Gamma {
+	leq(duration, 3);
+	meets(Delta);
+}
+
+class ReciverTimeline extends AgentTimeline {
+  predicate Alpha{}
+  predicate Beta{
+  }
+
+  ReciverTimeline(Mode _mode){
+    super(_mode);
+  }
+}
+
+ReciverTimeline::Beta {
+	after(CreatorTimeline.Gamma);
+}
+
+class EqReciverTimeline extends AgentTimeline {
+	predicate Alpha{}
+	predicate Beta{}
+
+	EqReciverTimeline(Mode _mode){
+		super(_mode);
+	}
+}
+
+EqReciverTimeline::Beta {
+	met_by(CreatorTimeline.Gamma);
+}
+
+/**
+ * This class has a predicate with a dispatch time paramater. Use to verify that it gets set
+ * on dispatch
+ */
+class SimpleTestForDispatchTime extends AgentTimeline {
+
+	predicate p{
+		int dispatch_time;
+	}
+
+	SimpleTestForDispatchTime(Mode _mode){
+		super(_mode);
+	}
+}
+
+SimpleTestForDispatchTime::p{
+	neq(dispatch_time, start);
+}

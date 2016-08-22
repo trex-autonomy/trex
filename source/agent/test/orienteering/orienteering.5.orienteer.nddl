@@ -1,0 +1,44 @@
+#include "GamePlay.nddl"
+
+
+
+Counter counterA = new Counter(Internal);
+Counter counterB = new Counter(Internal);
+Counter counterC = new Counter(Internal);
+Counter counterD = new Counter(Internal);
+OrienteeringTimeline ostimeline = new OrienteeringTimeline(External);
+
+
+rejectable(ostimeline.Active g0);
+g0.x = 30.0;
+g0.y = 40.0;
+g0.priority = 0;
+g0.value = 0;
+g0.countertimeline = counterA;
+g0.fakeDuration = 10;
+
+rejectable(ostimeline.Active g1);
+g1.x = 30.0;
+g1.y = 110.0;
+g1.priority = 1;
+g1.value = 1;
+g1.countertimeline = counterB;
+g1.fakeDuration = 60;
+
+rejectable(ostimeline.Active g2);
+g2.x = 30.0;
+g2.y = 120.0;
+g2.priority = 2;
+g2.value = 2;
+g2.countertimeline = counterC;
+g2.fakeDuration = 30;
+leq(g2.start, 85);
+
+rejectable(ostimeline.Active g3);
+g3.x = 40.0;
+g3.y = 110.0;
+g3.priority = 3;
+g3.value = 3;
+g3.countertimeline = counterD;
+g3.fakeDuration = 1;
+

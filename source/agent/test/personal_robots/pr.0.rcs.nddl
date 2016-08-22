@@ -1,0 +1,7 @@
+#include "personal_robots/model.nddl"
+
+
+CheckPath check_path = new CheckPath(Internal);
+
+fact(check_path.Inactive f);
+f.end > MISSION_END;

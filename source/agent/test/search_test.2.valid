@@ -1,0 +1,4 @@
+0 NOTIFY  a CreatorTimeline.Gamma
+0 NOTIFY  b CreatorTimeline.Delta
+2 NOTIFY  a CreatorTimeline.Delta
+4 NOTIFY  b CreatorTimeline.undefined

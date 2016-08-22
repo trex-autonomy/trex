@@ -1,0 +1,15 @@
+#include "GamePlay.nddl"
+
+Player player1 = new Player(Mode.External, Mode.External);
+Player player2 = new Player(Mode.External, Mode.External);
+Umpire umpire = new Umpire(player1, player2, Mode.Internal);
+
+close();
+
+// fact at start : umpire == Wait
+fact(umpire.Wait f);
+
+// goal in [20 30] : umpire == PlayGame
+rejectable(umpire.PlayGame game0);
+precedes(20, game0.start);
+precedes(game0.end, 30);

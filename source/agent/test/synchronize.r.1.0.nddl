@@ -1,0 +1,13 @@
+#include "GamePlay.nddl"
+
+// Internal Timelines of Frequency: 1/2.
+ScalabilityTestTimeline n1_3 = new ScalabilityTestTimeline(7,2,2,2, Mode.Internal);
+ScalabilityTestTimeline n1_2 = new ScalabilityTestTimeline(6,2,2,2, Mode.Internal);
+ScalabilityTestTimeline n1_1 = new ScalabilityTestTimeline(5,2,2,2, Mode.Internal);
+ScalabilityTestTimeline n1_0 = new ScalabilityTestTimeline(4,2,2,2, Mode.Internal);
+
+// External Timelines of Frequency: 1/1
+ScalabilityTestTimeline n0_3 = new ScalabilityTestTimeline(3,1,1,0, Mode.External);
+ScalabilityTestTimeline n0_2 = new ScalabilityTestTimeline(2,1,1,0, Mode.External);
+
+close();

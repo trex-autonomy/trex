@@ -1,0 +1,739 @@
+#include "Synchronizer.hh"
+#include "DbCore.hh"
+#include "Token.hh"
+#include "TokenVariable.hh"
+#include "PlanDatabaseWriter.hh"
+#include "PlanDatabase.hh"
+#include "Timeline.hh"
+
+namespace TREX {
+
+  Synchronizer::Synchronizer(const DbCoreId& _core) 
+    : m_core(_core), 
+      m_db(m_core->m_db),
+      m_timelines(m_core->m_timelines),
+      m_goals(m_core->m_goals), 
+      m_actions(m_core->m_actions), 
+      m_observations(m_core->m_observations), 
+      m_tokenAgenda(m_core->m_tokenAgenda),
+      m_committedTokens(m_core->m_committedTokens){}
+
+  /**
+   * Will be in the horizon if start.ub <= (tao) && end.lb >= tao
+   */
+  bool Synchronizer::inTickHorizon(const TokenId& token, int currentTick){
+    return token->start()->lastDomain().getUpperBound() <= currentTick && token->end()->lastDomain().getLowerBound() >= currentTick && token->end()->lastDomain().getLowerBound() > 0;
+  }
+
+  /**
+   * @brief Will be in scope if in the tick horizon and in scope for this reactor, and a unit decision
+   */
+  bool Synchronizer::inSynchScope(const TokenId& token){
+    if(inTickHorizon(token, m_core->getCurrentTick()) && 
+       m_core->inScope(token) && !m_core->inDeliberation(token) && isUnit(token))
+	return true;
+
+    return false;
+  }
+
+  /**
+   * @brief Will be a unit decision if it has only one option to be resolved or if it has a specific position
+   * in the plan. The latter case arises where we have a token that must go in a specific time slot but which
+   * could merge onto the plan or insert and nudge the plan. The resolution model will only try one. If that fails, it will
+   * relax the plan. Note that any token that is rejectable is not in scope.
+   */
+  bool Synchronizer::isUnit(const TokenId& token){
+    if(token->start()->lastDomain().isSingleton() || token->start()->lastDomain().getUpperBound() < m_core->getCurrentTick() ||
+       !m_db->hasCompatibleTokens(token) || 
+       !m_db->hasOrderingChoice(token))
+      return true;
+
+    return false;
+  }
+
+  ConstrainedVariableId Synchronizer::getActiveGuard(const ConstrainedVariableId& var){
+    EntityId parent = var->parent();
+    if(parent.isId() && TokenId::convertable(parent)){
+      TokenId token = parent;
+
+      // If the token has been merged, we want the underlying variable
+      if(token->isMerged())
+	return token->getActiveToken()->getVariables()[var->getIndex()];
+
+      // No binding rules on inactive tokens
+      if(token->isInactive())
+	return ConstrainedVariableId::noId();
+    }
+
+    return var;
+  }
+
+  /*
+   * @brief Resolve unit flaws at the execution frontier
+   */
+  bool Synchronizer::resolve(){
+    // Use a counter to aid with settng debug breakpoints
+    static unsigned int sl_counter(0);
+    sl_counter++;
+
+    if(!m_core->propagate())
+      return false;
+
+    debugMsg("Synchronizer:resolve", m_core->nameString() << 
+		 "[" << sl_counter << "] START" << std::endl << PlanDatabaseWriter::toString(m_db));
+
+    checkError(m_core->isValidDb(), "Invalid database before synchronization.");
+
+    m_stepCount = 0; // Reset step counter for stats
+    if(resolveTokens(m_stepCount) &&
+       completeInternalTimelines(m_stepCount) &&
+       resolveTokens(m_stepCount)){
+      debugMsg("Synchronizer:resolve", m_core->nameString() << "END" << std::endl << PlanDatabaseWriter::toString(m_db));
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * @brief Relax the plan at the execution frontier, but keep what is entailed by prior state.
+   * the model, and current observations..
+   */
+  bool Synchronizer::relax() {
+    TREXLog() << m_core->nameString() << "Beginning database relax." << std::endl;
+
+    debugMsg("Synchronizer:relax", m_core->nameString() << "START");
+
+    // Want to verify that there is no propagation during the reset
+    unsigned int lastCycle = m_db->getConstraintEngine()->cycleCount();
+
+    // Reset observations to base values. It is important that we do this before processing
+    // other tokens as we want to recover the current observation and the easiest way to
+    // do that is to evaluate the end time of committed observations or observations that are
+    // merged onto committed tokens. We cannot do the latter if they have been split, which
+    // can happen when we reset goals or other commitments. We do not want any propagation to be
+    // done during this reset since we will just be relaxing the database and re-propagating and
+    // the system will be in an incomplete state in the interim while all resets are done.
+    resetObservations();
+
+    // Reset the goals, clearing out the crud
+    resetGoals();
+
+    // Reset remaining tokens
+    resetRemainingTokens();
+
+    // Purge bad links in foreign key table.
+    m_core->purgeOrphanedKeys();
+
+    if(m_db->getConstraintEngine()->cycleCount() > (lastCycle + 1))
+      TREXLog() << m_core->nameString() << "WARNING: Propagation occured during relaxation.";
+
+    checkError(m_db->getConstraintEngine()->cycleCount() <= (lastCycle + 1), "Bug somewhere!");
+    checkError(m_core->verifyEntities(), "Bug somewhere.");
+
+    // Final step before trying again to resolve
+    if(insertCopiedValues()){
+      debugMsg("Synchronizer:relax", m_core->nameString() << "Relaxed Database Below" << std::endl << PlanDatabaseWriter::toString(m_db));
+      return true;
+    }
+
+    TREXLog() << m_core->nameString() << "Relax failed." << std::endl;
+
+    return false;
+  }
+
+  /**
+   * @brief Relaxes goal commitments and removes those goals that are no longer achievable
+   * @see relax
+   */
+  void Synchronizer::resetGoals(){
+    debugMsg("Synchronizer:resetGoals", m_core->nameString() << "START");
+
+    std::vector<TokenId> past; /*!< Necessarily in the past */
+    std::vector<TokenId> present; /*!< Committed goals we will want to make  a relaxed copy of */
+
+    // Iterate over the goals and place in different buckets. We make no mods in this iteration since they can impact the
+    // contents of the map, possibly removing goals altogether. This can be the case since some goals are sub-goals and can thus be deleted
+    // if the master is relaxed or removed.
+    TokenSet goals = m_goals;
+    for(TokenSet::const_iterator it = goals.begin(); it != goals.end(); ++it){
+      TokenId goal = *it;
+      checkError(goal.isValid(), "Invalid goal:" << goal);
+      checkError(goal->master().isNoId(), 
+		 "Should only have orphans in the goal buffer. " << 
+		 goal->toString() << " has master " << goal->getMaster()->toString());
+
+      assertTrue(!goal->start()->baseDomain().isEmpty(), "Bad");
+
+      const IntervalIntDomain& endTime = (goal->isMerged() ? goal->getActiveToken()->end()->baseDomain() : goal->end()->baseDomain());
+
+      debugMsg("Synchronizer:resetGoals", m_core->nameString() << "Evaluating " << goal->toString() << " ending in " << endTime.toString());
+
+
+      // Case 2: The goal is a current value it will be handled when we reset remaining tokens
+      if(isCurrent(goal)){
+	m_goals.erase(goal);
+	debugMsg("Synchronizer:resetGoals", m_core->nameString() << "Removing goal but keeping value for:" << goal->toString());
+	continue;
+      }
+
+      // Case 1: The goal must end in the past
+      if(endTime.getUpperBound() <= m_core->getCurrentTick()){
+	past.push_back(goal);
+	continue;
+      }
+
+      // Case 3: The goal was previously rejected and cannot be started. This is also considered the past.
+      if(goal->isRejected() && goal->start()->baseDomain().getUpperBound() < m_core->getCurrentTick()){
+	past.push_back(goal);
+	continue;
+      }
+
+      // Case 4: The goal is merged with a current value. We will remove the goal as it has already been started.
+      if(goal->isMerged() && isCurrent(goal->getActiveToken())){
+	TokenId activeToken = goal->getActiveToken();
+	past.push_back(goal);
+	continue;
+      }
+
+      // Case 5: The goal is active. It will be in the future so and it's parameters should be reset
+      if(goal->isActive()){
+	const std::vector<ConstrainedVariableId>& vars = goal->getVariables();
+	for(std::vector<ConstrainedVariableId>::const_iterator it = vars.begin(); it != vars.end(); ++it){
+	  ConstrainedVariableId var = *it;
+	  if(var->canBeSpecified() && var->isSpecified())
+	    var->reset();
+	}
+      }
+
+      // Case 6: The goal cannot be planned in time
+      if(goal->start()->baseDomain().getUpperBound() <= (m_core->getCurrentTick() + m_core->getLatency())){
+	past.push_back(goal);
+	continue;
+      }
+
+      // Finally, if the goal remains !inActive, it must be cancelled and fixed in the future.
+      if(!goal->isInactive()){
+	goal->cancel();
+	goal->start()->restrictBaseDomain(IntervalIntDomain(m_core->getCurrentTick(), PLUS_INFINITY));
+      }
+    }
+
+    for(std::vector<TokenId>::const_iterator it = past.begin(); it != past.end(); ++it){
+      TokenId token = *it;
+      debugMsg("Synchronizer:resetGoals", m_core->nameString() << "Discarding goal that has passed:" << token->toString());
+      m_core->cleanupGoal(token);
+      token->discard();
+    }
+
+
+    debugMsg("Synchronizer:resetGoals", m_core->nameString() << "END");
+  }
+
+  /**
+   * @brief Clear out observations, and set only the current observation. Assumes no splitting has
+   * occurred yet. So must precede goal reset.
+   */
+  void Synchronizer::resetObservations(){
+    static int sl_counter(0);
+    sl_counter++;
+
+    debugMsg("Synchronizer:resetObservations", m_core->nameString() << "[" << sl_counter << "]START");
+
+    TokenSet observations = m_observations;
+    for(TokenSet::iterator it = observations.begin(); it != observations.end(); ++it){
+      TokenId observation = *it;
+      checkError(observation.isValid(), observation);
+
+      debugMsg("Synchronizer:resetObservations", m_core->nameString() << "Evaluating " << observation->toString());
+
+      // If the observation contains merged tokens, they should all be cancelled.
+      TokenSet mergedTokens = observation->getMergedTokens();
+      for(TokenSet::const_iterator it = mergedTokens.begin(); it != mergedTokens.end(); ++it){
+	TokenId m = *it;
+	m->cancel();
+      }
+
+      if(m_core->isCurrentObservation(observation)){
+	debugMsg("Synchronizer:resetObservations", m_core->nameString() << "Handling current observation " << observation->toString());
+
+	// Relax if we can and if we must. If committed, see remaining Tokens
+	if(!observation->isCommitted() && !observation->isInactive()){
+	  debugMsg("Synchronizer:resetObservations", m_core->nameString() << "Relaxing " << observation->toString());
+	  observation->cancel();
+	}
+
+	// We know we are synhronizing, so if this is the current value, we are extending it so that it must hold for this tick
+	checkError(observation->end()->baseDomain().isMember(m_core->getCurrentTick() + 1), 
+		   observation->toString() << " must end in " << observation->end()->baseDomain().toString());
+
+	// The end variable might be specified, so reset if it is.
+	if(observation->end()->isSpecified())
+	  observation->end()->reset();
+	else
+	  observation->end()->relax();
+
+	observation->end()->restrictBaseDomain(IntervalIntDomain(m_core->getCurrentTick() + 1, PLUS_INFINITY));
+      }
+      else
+	observation->discard();
+    }
+
+    debugMsg("Synchronizer:resetObservations", m_core->nameString() << "END");
+  }
+
+  /**
+   * @brief Handle the remainder
+   * Assumes we have already reset goals and observations. Will also force a copy of current committed tokens to re-apply the model.
+   * @see relax
+   */
+  void Synchronizer::resetRemainingTokens(){
+    debugMsg("Synchronizer:resetRemainingTokens", m_core->nameString() << "START");
+
+    std::vector<TokenId> tokensToDiscard;
+    const TokenSet allTokens = m_db->getTokens();
+    for(TokenSet::const_iterator it = allTokens.begin(); it!= allTokens.end(); ++it){
+      TokenId token = *it;
+      checkError(token.isValid(), token);
+
+      const IntervalIntDomain& endTime = token->end()->baseDomain();
+
+      debugMsg("Synchronizer:resetRemainingTokens", m_core->nameString() << "Evaluating " << token->toString() << " ending in " << endTime.toString());
+
+      // Case 1: The value is current. This means it is committed, which implies it was previously found to be consistent
+      // during synchronization. 
+      if(isCurrent(token)){
+	copyValue(token);
+	tokensToDiscard.push_back(token);
+	continue;
+      }
+
+      // Case 3: After excluding the above cases, as long as it is not a goal or observation, which will have been dealt with expliticly in
+      // resetGoals and resetObservations, then we want to remove the token. New tokens will be regenerated by the model if implied.
+      if(!m_core->isGoal(token) && !m_core->isObservation(token))
+	tokensToDiscard.push_back(token);
+    }
+
+
+    // Now we clean up all the tokens we plan to discard.
+    debugMsg("Synchronizer:resetRemainingTokens", "Discarding " << tokensToDiscard.size() << " tokens");
+
+    Entity::discardAll(tokensToDiscard);
+
+    debugMsg("Synchronizer:resetRemainingTokens", m_core->nameString() << "END");
+  }
+
+  /**
+   * @brief True if a current value.
+   */
+  bool Synchronizer::isCurrent(const TokenId& token) {
+    return (token->isCommitted() && !token->isTerminated() && 
+	    token->end()->baseDomain().getUpperBound() >= m_core->getCurrentTick() && !m_core->isAction(token));
+  }
+
+  /**
+   * @brief Copies a current value to a new token which is also active and committed. We relax the new token
+   * in its end time and in the set of applicable constraints
+   */
+  void Synchronizer::copyValue(const TokenId& source){
+    // Allocate a token
+    TokenId token = m_db->getClient()->createToken(source->getPredicateName().c_str(), DbCore::NOT_REJECTABLE);
+    token->activate();
+
+    // Pin all variables with published values of the token
+    for(unsigned int i = 0; i < (unsigned int) source->parameters().size(); i++){
+      token->parameters()[i]->restrictBaseDomain(source->parameters()[i]->baseDomain());
+    }
+
+    token->getObject()->restrictBaseDomain(source->getObject()->baseDomain());
+    token->start()->restrictBaseDomain(source->start()->baseDomain());
+    token->end()->restrictBaseDomain(IntervalIntDomain(m_core->getCurrentTick() + 1, PLUS_INFINITY));
+
+    // Update the duration also, based on base domain values of start and end
+    int durationMin = std::max((int) ( token->end()->baseDomain().getLowerBound() - token->start()->baseDomain().getUpperBound()), 0);
+    token->duration()->restrictBaseDomain(IntervalIntDomain(durationMin, PLUS_INFINITY));
+
+
+    if(m_core->isObservation(source))
+      m_core->bufferObservation(token);
+    else if(m_core->isGoal(source)){
+      token->end()->restrictBaseDomain(source->end()->baseDomain());
+      m_goals.insert(token);
+    }
+
+    // Finally, we commit the value. This is reasonable since we are copying a current value. All this approach allows
+    // us to do is re-apply the model with internal decisions free to be taken anew. Public variables of the token
+    // remain bound to prior valaues since the past is monotonic. Since we have already done the base domain restriction
+    // and we want to prevent propagation while we are relaxing, we just commit directly
+    token->commit();
+
+    debugMsg("Synchronizer:copyValue",m_core->nameString() << "Replaced " << source->toString() << " with " << token->toString());
+  }
+
+  /**
+   * Processes the token agenda and makes insertion or merge choices
+   */
+  bool Synchronizer::resolveTokens(unsigned int& stepCount){
+    static unsigned int sl_counter;
+
+    unsigned int lastCount = PLUS_INFINITY;
+    while(lastCount != m_stepCount){
+      lastCount = m_stepCount; // Update this to track changes on this iteration
+
+      // Process tokens on the agenda that are in scope
+      const TokenSet agenda = m_core->m_tokenAgenda;
+
+      if(!m_core->propagate())
+	return false;
+
+      for(TokenSet::const_iterator it = agenda.begin(); it != agenda.end(); ++it){
+	// Debugging Aid
+	sl_counter++;
+
+	TokenId token = *it;
+
+	debugMsg("Synchronizer:resolveTokens", m_core->nameString() << "[" << sl_counter << "] Evaluating " << token->toString() <<
+		 " Start = " << token->start()->toString() << " End = " << token->end()->toString());
+
+	// Tokens that are unbound are ignored since they are not unit decisions
+	if(!token->getObject()->lastDomain().isSingleton())
+	  continue;
+
+	// If not inactive, then it must have been resolved already
+	if(!token->isInactive())
+	  continue;
+
+	// If outside the horizon or out of scope, skip it
+	if(!inSynchScope(token))
+	  continue;
+
+	stepCount++;
+
+	debugMsg("Synchronizer:resolveTokens", 
+		 m_core->nameString() << "Resolving " << token->toString() << " IN " << 
+		 std::endl << PlanDatabaseWriter::toString(m_db));
+
+	// Resolve the token and ensure consistency in order to continue.
+	if(!resolveToken(token, stepCount) || !m_core->propagate())
+	  return false;
+      }
+
+      if(!fireRules(m_stepCount))
+	return false;
+    }
+
+    return true;
+  }
+
+  bool Synchronizer::resolveToken(const TokenId& token, unsigned int& stepCount){
+    if(mergeToken(token) || insertToken(token, stepCount))
+      return true;
+
+    m_core->markInvalid(std::string("Could not insert ") + token->toString() + 
+			" into the plan. The plan is not compatible with observations and must be relaxed. Enable all DbCore messages and also enable Synchronizer messages in the Debug.cfg file.");
+    return false;
+  }
+
+  /**
+   * 1. agent timelines
+   * 2. actions
+   */
+  bool Synchronizer::fireRules(unsigned int& stepCount){
+    static unsigned int sl_counter(0);
+    sl_counter++;
+
+    if(m_core->isInvalid())
+      return false;
+
+    // Process timeline tokens
+    for(std::vector<TimelineId>::const_iterator it = m_timelines.begin(); it != m_timelines.end(); ++it){
+      TimelineId timeline = *it;
+      const std::list<TokenId>& tokenSequence = timeline->getTokenSequence();
+      for(std::list<TokenId>::const_iterator t_it = tokenSequence.begin(); t_it != tokenSequence.end(); ++t_it){
+
+	TokenId token = *t_it;
+	checkError(token.isValid(), token);
+
+	debugMsg("Synchronizer:fireRules", m_core->nameString() << "[" << sl_counter << "] Checking " << token->toString() <<
+	       " Start = " << token->start()->toString() << " End = " << token->end()->toString());
+
+	// Beyond execution frontier
+	if(token->start()->lastDomain().getUpperBound() > (m_core->getCurrentTick() + 1))
+	  break;
+
+	// Before execution frontier
+	if(token->end()->lastDomain().getUpperBound() < m_core->getCurrentTick())
+	  continue;
+
+	if(!fireRules(token, stepCount))
+	  return false;
+      }
+    }
+
+    // process relevant m_actions
+    for(TokenSet::const_iterator it = m_actions.begin(); it != m_actions.end(); ++it){
+	TokenId token = *it;
+	checkError(token.isValid(), token);
+
+	debugMsg("Synchronizer:fireRules", m_core->nameString() << "[" << sl_counter << "] Checking " << token->toString() <<
+	       " Start = " << token->start()->toString() << " End = " << token->end()->toString());
+
+	if(!token->isActive() || !inTickHorizon(token, m_core->getCurrentTick()))
+	  continue;
+
+	if(!fireRules(token, stepCount))
+	  return false;
+    }
+
+    return true;
+  }
+
+  bool Synchronizer::fireRules(const TokenId& token, unsigned int& stepCount){
+    std::set<RuleInstanceId> ruleInstances;
+    m_core->m_assembly.getRulesEngine()->getRuleInstances(token, ruleInstances);
+    for(std::set<RuleInstanceId>::const_iterator it = ruleInstances.begin(); it != ruleInstances.end(); ++it){
+      RuleInstanceId r = *it;
+      if(!fire(r, stepCount))
+	return false;
+    }
+
+    return true;
+  }
+
+  bool Synchronizer::fire(const RuleInstanceId& r, unsigned int& stepCount){
+
+    if(!r->isExecuted()){
+      const std::vector<ConstrainedVariableId>& guards = r->getGuards();
+      for(std::vector<ConstrainedVariableId>::const_iterator it = guards.begin(); it != guards.end(); ++it){
+	ConstrainedVariableId guard = getActiveGuard(*it);
+	if(guard.isId() && guard->lastDomain().isSingleton() && !guard->isSpecified() && guard->canBeSpecified()){
+	  debugMsg("Synchronizer:fire", m_core->nameString() << "Binding guard " << guard->toString() << " for " << r->getToken()->toString());
+	  guard->specify(guard->lastDomain().getSingletonValue());
+
+	  stepCount++;
+
+	  if(!m_core->propagate())
+	    return false;
+	}
+      }
+    }
+
+    // Apply to children
+    if(r->isExecuted()){
+      const std::vector<RuleInstanceId>& childRules = r->getChildRules();
+      for(std::vector<RuleInstanceId>::const_iterator it = childRules.begin(); it != childRules.end(); ++it){
+	RuleInstanceId child = *it;
+	if(!fire(child, stepCount))
+	  return false;
+      }
+    }
+
+    return true;
+  }
+
+  /**
+   * Notes:
+   * 1. All copied values will have been committed
+   * 2. Insertion has been deferred till after all cleanup has occured of prior tokens to avoid restrictions mingling
+   *    with relaxations.
+   * 3. We assume no copied values have been inserted yet
+   */
+  bool Synchronizer::insertCopiedValues(){
+    debugMsg("Synchronizer:insertCopiedValues", 
+	     m_core->nameString() << "Relaxed Database Prior to insertion of copied values" << std::endl << PlanDatabaseWriter::toString(m_db));
+
+    for(TokenSet::const_iterator it = m_committedTokens.begin(); it != m_committedTokens.end(); ++it){
+      TokenId token = *it;
+      unsigned int stepCount = 0;
+      if(!insertToken(token, stepCount)){
+	debugMsg("Synchronizer:insertCopiedValues", m_core->nameString() << "Failed to insert " << token->toString());
+	m_core->markInvalid(std::string("Failed to insert ") + token->toString() + 
+			    "This is bad. After relaxing the plan and restoring necessary state, we still can't synchronize. " + 
+			    "There is probably a bug in the model. Enable PlanDatabase and DbCore messages in Debug.log");
+	return false;
+      }
+    }
+
+    return true;
+  }
+
+  /**
+   * Only merge it. True if we tried to merge, false if we did not.
+   */
+  bool Synchronizer::mergeToken(const TokenId& token){
+    if(m_core->isInvalid())
+      return false;
+
+    // No need to try if already active, or if cannot be merged
+    if(!token->isInactive() || !token->getState()->lastDomain().isMember(Token::MERGED))
+      return false;
+
+    // Compute a choice to merge. Only one
+    std::vector<TokenId> results;
+    m_db->getCompatibleTokens(token, results, 1, false);
+
+    // If we have a hit, merge
+    if(results.size() == 1){
+      TokenId activeToken = results[0];
+
+      // Check that the active token is complete. If not, cannot merge onto it since that would draw it into
+      // execution, leading to commitment.
+      if(m_core->inDeliberation(activeToken))
+	return false;
+
+      token->merge(activeToken);
+
+      debugMsg("Synchronizer:mergeToken", 
+	       m_core->nameString() << "Merging " << token->toString() << " onto " << activeToken->toString());
+
+      m_core->propagate();
+
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * Tail recursive to follow the slaves
+   */
+  bool Synchronizer::insertToken(const TokenId& token, unsigned int& stepCount){
+    if(m_core->isInvalid() || m_core->inDeliberation(token))
+      return false;
+
+    if(token->isInactive())
+      token->activate();
+
+    ObjectId object = token->getObject()->lastDomain().getSingletonValue();
+
+    // If not a timeline - no ordering requirement
+    if(!TimelineId::convertable(object))
+      return m_core->propagate();
+
+    std::vector<OrderingChoice> results;
+    m_db->getOrderingChoices(token, results, 1);
+
+    if (results.empty())
+      return false;
+
+    const OrderingChoice& choice = results[0];
+    checkError(choice.first == object, choice.first->toString() << " != " << object->toString());
+
+    TokenId p = choice.second.first;
+    TokenId s = choice.second.second;
+
+    debugMsg("Synchronizer:insertToken", m_core->nameString() << "Inserting " << token->toString());
+
+    object->constrain(p, s);
+
+    m_core->propagate();
+
+    condDebugMsg(m_core->isInvalid(), "Synchronizer:insertToken", m_core->nameString() << 
+		 "Inconsistent after inserting " << token->toString() << " in " << std::endl << PlanDatabaseWriter::toString(m_db));
+
+    const TokenSet& slaves = token->slaves();
+
+    for(TokenSet::const_iterator it = slaves.begin(); it != slaves.end(); ++it){
+
+      if(m_core->isInvalid())
+	return false;
+
+      TokenId slave = *it;
+
+      if(!inSynchScope(slave))
+	continue;
+
+      stepCount++;
+
+      if(!resolveToken(slave, stepCount))
+	return false;
+    }
+
+    return true;
+  }
+
+  /**
+   * @brief Iterates over all internal timelines. If it finds a gap at the current execution frontier, it will allocate
+   * and insert an 'undefined' token which starts at this tick, and whose end is open.
+   */
+  bool Synchronizer::completeInternalTimelines(unsigned int& stepCount){
+    if(m_core->isInvalid())
+      return false;
+
+    unsigned int max_i = m_core->m_internalTimelineTable.size();
+    TICK tick = m_core->getCurrentTick();
+
+    for(unsigned int i = 0; i < max_i; i++){
+      TimelineId timeline =  m_core->m_internalTimelineTable[i].first;
+      const std::list<TokenId>& tokens = timeline->getTokenSequence();
+
+      // Advance the iterator to the execution frontier
+      std::list<TokenId>::const_iterator it = tokens.begin();
+      TokenId token;
+      while(it != tokens.end()){
+	TokenId candidate = *it;
+
+	// Terminate if we have moved past tao
+	if(candidate->start()->lastDomain().getLowerBound() > tick)
+	  break;
+
+	// Terminate, selecting the candidate, if it contains tao
+	if(candidate->start()->lastDomain().getLowerBound() <= tick && 
+	   candidate->end()->lastDomain().getUpperBound() > tick){
+	  token = candidate;
+	  break;
+	}
+
+	++it;
+      }
+
+      // If no token, then we must insert
+      if(token.isNoId()){
+	if(!insertDefaultValue(timeline, stepCount))
+	  return false;
+
+	continue;
+      }
+ 
+      // If the end time exceeds the current tick, the token can be extended
+      if(token->start()->lastDomain().getUpperBound() < tick && token->end()->lastDomain().getUpperBound() > tick)
+	m_core->extendCurrentValue(token);
+      else // We should start the next token
+	token->start()->specify(tick);
+
+      // Propagate since we have restricted the database and this can have knock-on effects
+      if(!m_core->propagate())
+	return false;
+    }
+
+    return true;
+  }
+
+  /**
+   * @brief Insert a new undefined token relative to the given token
+   */
+  bool Synchronizer::insertDefaultValue(const TimelineId& timeline, unsigned int& stepCount){
+    static const int sl_defaultPredicateIndex(1); // Mode is first.
+
+    // Allocate a token - it should be inactive but not rejectable. We are definitievly setting the state
+    // to undefined, though we may merge in doing so.
+    std::string predicate = timeline->getType().toString();
+    ConstrainedVariableId defaultPredicateName = timeline->getVariables()[sl_defaultPredicateIndex];
+    checkError(defaultPredicateName.isValid(), "Invalid NDDL class for " << timeline->toString());
+    checkError(defaultPredicateName->lastDomain().isSingleton(), defaultPredicateName->toString());
+
+    LabelStr predLabel = (LabelStr) defaultPredicateName->lastDomain().getSingletonValue();
+    predicate += ".";
+    predicate += predLabel.toString();
+
+    debugMsg("Synchronizer:insertDefaultValue", m_core->nameString() << "Insert " << predicate << " On " << timeline->toString());
+ 
+    TokenId token = m_db->getClient()->createToken(predicate.c_str(), DbCore::NOT_REJECTABLE);
+    token->activate();
+    token->start()->restrictBaseDomain(IntervalIntDomain(m_core->getCurrentTick(), m_core->getCurrentTick()));
+    token->end()->restrictBaseDomain(IntervalIntDomain(m_core->getCurrentTick() + 1, PLUS_INFINITY));
+    token->getObject()->specify(timeline);
+
+    return insertToken(token, stepCount);
+  }
+}

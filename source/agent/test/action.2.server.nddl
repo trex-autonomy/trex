@@ -1,0 +1,10 @@
+/**
+ * Just holds the values timeline
+ */
+
+#include "GamePlay.nddl"
+
+TestActions server_actions = new TestActions();
+ValueTimeline values = new ValueTimeline(Mode.Internal);
+
+close();

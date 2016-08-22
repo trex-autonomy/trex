@@ -1,0 +1,9 @@
+# This file is requird by jam to bootstrap the build process
+{
+ # Extracting a local variable is important.
+ include [ FDirName $(PLASMA) Jamrules ] ;
+ include [ FDirName  $(TREX) Jamfile ] ;
+
+ TREX_READY = TRUE ;
+}
+

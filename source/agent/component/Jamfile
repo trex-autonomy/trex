@@ -1,0 +1,13 @@
+SubDir TREX agent component ;
+
+if ! $(TREX_READY) {
+
+SubDirC++Flags -Wno-unknown-pragmas ;
+
+ModuleComponent TREX
+	:
+	GoalManager.cc
+	OrienteeringSolver.cc
+	;
+	
+} # TREX_READY
